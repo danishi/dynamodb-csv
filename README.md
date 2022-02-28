@@ -159,4 +159,4 @@ my_table truncated
 
 ## License
 
-See [LICENSE](LICENSE.md)
+See [LICENSE](LICENSE)
