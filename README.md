@@ -1,5 +1,7 @@
 # DynamoDBImportCSV
 
+![MIT](https://img.shields.io/github/license/danishi/DynamoDBImportCSV)
+
 Python script to import CSV into DynamoDB
 
 ## Introduction
