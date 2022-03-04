@@ -32,6 +32,7 @@ Import CSV file into DynamoDB table utilities
 
 optional arguments:
   -h, --help            show this help message and exit
+  -v, --version         show version
   -i, --imp             mode import
   --truncate            mode truncate
   -t TABLE, --table TABLE

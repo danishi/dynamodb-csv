@@ -2,13 +2,18 @@ import boto3
 import configparser
 import argparse
 
-from .dynamodb import csv_import, truncate
+from dynamodb import csv_import, truncate
+
+__version__ = "1.2.2"
 
 
 def main():
     # arguments parse
     parser = argparse.ArgumentParser(
         description="Import CSV file into DynamoDB table utilities")
+    parser.add_argument("-v", "--version", action="version",
+                        version=__version__,
+                        help="show version")
     parser.add_argument(
         "-i", "--imp", help="mode import", action="store_true")
     parser.add_argument(
