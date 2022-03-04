@@ -1,6 +1,7 @@
 # DynamoDBImportCSV
 
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDBImportCSV)
+![Python](https://img.shields.io/badge/Python-3-1384C5.svg)
 
 Python script to import CSV into DynamoDB
 
@@ -16,7 +17,17 @@ it works for me.
 ```
 $ python -m venv venv
 $ . venv/bin/activate
-$ pip install -r requirements.txt
+$ python setup.py install
+$ dynamodb_import -h
+```
+
+### For developer
+
+```
+$ python -m venv venv
+$ . venv/bin/activate
+$ pip install -r requirements-dev.txt
+$ python app/dynamodb_import.py -h
 ```
 
 ### Create your config.ini file
@@ -117,8 +128,8 @@ $ aws dynamodb describe-table --table-name my_table
 This command requires a CSV spec file in the same directory.  
 
 ```
-$ python dynamodb_import.py -h                 
-usage: dynamodb_import.py [-h] table csv_file
+$ dynamodb_import -h
+usage: dynamodb_import [-h] table csv_file
 
 import CSV file into DynamoDB table
 
@@ -129,7 +140,7 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 
-$ python dynamodb_import.py my_table sample.csv
+$ dynamodb_import my_table sample.csv
 please wait my_table importing sample.csv
 300it [00:00, 19983.03it/s]
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.97it/s]
@@ -141,8 +152,8 @@ my_table csv imported 300 items
 Also, since you may want to erase unnecessary data during the import experiment, we have prepared a command to discard it.
 
 ```
-$ python dynamodb_truncate.py -h
-usage: dynamodb_truncate.py [-h] table
+$ dynamodb_truncate -h 
+usage: dynamodb_truncate [-h] table
 
 DynamoDB truncate table
 
@@ -152,7 +163,7 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 
-$ python dynamodb_truncate.py my_table
+$ dynamodb_truncate my_table
 my_table scan 300 items
 please wait my_table truncating
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.95it/s]

@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger("logger")
 logger.setLevel(logging.INFO)
 
-log_file = logging.FileHandler("dynamodb_truncate.log")
+log_file = logging.FileHandler("app/logs/dynamodb_truncate.log")
 format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
 log_file.setFormatter(logging.Formatter(format))
 
@@ -53,9 +53,10 @@ def truncate(table):
                 break
     except ClientError as e:
         logger.error(e)
-        return "table not found"
+        return "aws client error"
     except Exception as e:
         logger.error(e)
+        return "table not found"
 
     logger.debug(delete_items)
     print("{name} scan {count} items".format(
