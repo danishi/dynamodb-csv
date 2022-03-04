@@ -1,5 +1,6 @@
 # DynamoDBImportCSV
 
+[![ci](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDBImportCSV)
 ![Python](https://img.shields.io/badge/Python-3-1384C5.svg)
 
