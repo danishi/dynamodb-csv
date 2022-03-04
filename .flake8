@@ -2,6 +2,7 @@
 exclude =
     git,
     venv
+    build
 
 ignore =
     E128
