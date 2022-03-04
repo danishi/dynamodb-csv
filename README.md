@@ -1,10 +1,10 @@
-# DynamoDBImportCSV
+# DynamoDB import CSV utilities
 
 [![ci](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDBImportCSV)
 ![Python](https://img.shields.io/badge/Python-3-1384C5.svg)
 
-Python script to import CSV into DynamoDB
+Python command to import CSV into DynamoDB
 
 ## Introduction
 
@@ -19,7 +19,18 @@ it works for me.
 $ python -m venv venv
 $ . venv/bin/activate
 $ python setup.py install
-$ dynamodb_import -h
+$ dynamodb-csv -h
+usage: dynamodb-csv [-h] [-i] [--truncate] -t TABLE [-f FILE]
+
+Import CSV file into DynamoDB table utilities
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i, --imp             mode import
+  --truncate            mode truncate
+  -t TABLE, --table TABLE
+                        DynamoDB table name
+  -f FILE, --file FILE  UTF-8 CSV file path required import mode
 ```
 
 ### For developer
@@ -28,7 +39,7 @@ $ dynamodb_import -h
 $ python -m venv venv
 $ . venv/bin/activate
 $ pip install -r requirements-dev.txt
-$ python app/dynamodb_import.py -h
+$ python app/main.py -h
 ```
 
 ### Create your config.ini file
@@ -129,19 +140,7 @@ $ aws dynamodb describe-table --table-name my_table
 This command requires a CSV spec file in the same directory.  
 
 ```
-$ dynamodb_import -h
-usage: dynamodb_import [-h] table csv_file
-
-import CSV file into DynamoDB table
-
-positional arguments:
-  table       DynamoDB table name
-  csv_file    UTF-8 CSV file path
-
-optional arguments:
-  -h, --help  show this help message and exit
-
-$ dynamodb_import my_table sample.csv
+$ dynamodb-csv -i -t my_table -f sample.csv
 please wait my_table importing sample.csv
 300it [00:00, 19983.03it/s]
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.97it/s]
@@ -153,18 +152,7 @@ my_table csv imported 300 items
 Also, since you may want to erase unnecessary data during the import experiment, we have prepared a command to discard it.
 
 ```
-$ dynamodb_truncate -h 
-usage: dynamodb_truncate [-h] table
-
-DynamoDB truncate table
-
-positional arguments:
-  table       DynamoDB table name
-
-optional arguments:
-  -h, --help  show this help message and exit
-
-$ dynamodb_truncate my_table
+$ dynamodb-csv --truncate -t my_table
 my_table scan 300 items
 please wait my_table truncating
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.95it/s]
