@@ -1,7 +1,7 @@
 [flake8]
 exclude =
     git,
-    venv
+    venv,
     build
 
 ignore =
