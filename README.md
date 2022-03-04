@@ -19,10 +19,12 @@ it works for me.
 
 ## Getting started
 
+### Install
+
 ```
 $ python -m venv venv
 $ . venv/bin/activate
-$ python setup.py install
+$ pip install dynamodb-csv
 $ dynamodb-csv -h
 usage: dynamodb-csv [-h] [-i] [--truncate] -t TABLE [-f FILE]
 
@@ -37,7 +39,16 @@ optional arguments:
   -f FILE, --file FILE  UTF-8 CSV file path required import mode
 ```
 
-### For developer
+### Install for developer 
+
+```
+$ python -m venv venv
+$ . venv/bin/activate
+$ python setup.py install
+$ dynamodb-csv -h
+```
+
+or
 
 ```
 $ python -m venv venv
