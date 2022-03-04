@@ -10,7 +10,7 @@ from decimal import Decimal
 logger = logging.getLogger("logger")
 logger.setLevel(logging.INFO)
 
-log_file = logging.FileHandler("dynamodb_import.log")
+log_file = logging.FileHandler("app/logs/dynamodb_import.log")
 format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
 log_file.setFormatter(logging.Formatter(format))
 
@@ -54,49 +54,53 @@ def csv_import(table, file):
         return "CSV specification file can't read"
 
     # read csv
-    with open(file, mode="r", encoding="utf_8") as f:
-        reader = csv.DictReader(f)
+    try:
+        with open(file, mode="r", encoding="utf_8") as f:
+            reader = csv.DictReader(f)
 
-        # batch_size = 100
-        batch = []
+            # batch_size = 100
+            batch = []
 
-        print("please wait {name} importing {file}".format(
-            name=table.name, file=file))
-        for row in tqdm(reader):
-            # No use buffer
-            # if len(batch) >= batch_size:
-            #     write_to_dynamo(table, batch)
-            #     batch.clear()
+            print("please wait {name} importing {file}".format(
+                name=table.name, file=file))
+            for row in tqdm(reader):
+                # No use buffer
+                # if len(batch) >= batch_size:
+                #     write_to_dynamo(table, batch)
+                #     batch.clear()
 
-            # updated dict to match specifications
-            for key in row.keys():
-                spec = csv_spec.get("CSV_SPEC", key)
-                if spec == "S":  # String
-                    row[key] = str(row[key])
-                elif spec == "I":  # Integer
-                    row[key] = int(row[key])
-                elif spec == "D":  # Decimal
-                    row[key] = Decimal(row[key])
-                elif spec == "B":  # Boolean
-                    row[key] = bool(row[key])
-                elif spec == "J":  # Json
-                    row[key] = json.loads(row[key])
-                elif spec == "SL":  # StringList
-                    row[key] = row[key].split()
-                elif spec == "DL":  # DecimalList
-                    row[key] = list(map(Decimal, row[key].split()))
-                else:
-                    pass
+                # updated dict to match specifications
+                for key in row.keys():
+                    spec = csv_spec.get("CSV_SPEC", key)
+                    if spec == "S":  # String
+                        row[key] = str(row[key])
+                    elif spec == "I":  # Integer
+                        row[key] = int(row[key])
+                    elif spec == "D":  # Decimal
+                        row[key] = Decimal(row[key])
+                    elif spec == "B":  # Boolean
+                        row[key] = bool(row[key])
+                    elif spec == "J":  # Json
+                        row[key] = json.loads(row[key])
+                    elif spec == "SL":  # StringList
+                        row[key] = row[key].split()
+                    elif spec == "DL":  # DecimalList
+                        row[key] = list(map(Decimal, row[key].split()))
+                    else:
+                        pass
 
-            logger.debug(row)
-            batch.append(row)
+                logger.debug(row)
+                batch.append(row)
 
-        if(len(batch)) > 0:
-            write_to_dynamo(table, batch)
+            if(len(batch)) > 0:
+                write_to_dynamo(table, batch)
 
-    return "{name} csv imported {count} items".format(
-        name=table.name, count=count)
+        return "{name} csv imported {count} items".format(
+            name=table.name, count=count)
 
+    except Exception as e:
+        logger.error(e)
+        return "CSV file can't read"
 
 def write_to_dynamo(table, rows):
     global count
