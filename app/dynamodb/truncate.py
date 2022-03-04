@@ -1,7 +1,4 @@
-import boto3
 from botocore.exceptions import ClientError
-import configparser
-import argparse
 from tqdm import tqdm
 import logging
 
@@ -13,29 +10,6 @@ format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
 log_file.setFormatter(logging.Formatter(format))
 
 logger.addHandler(log_file)
-
-
-def main():
-    # arguments parse
-    parser = argparse.ArgumentParser(description="DynamoDB truncate table")
-    parser.add_argument("table", help="DynamoDB table name")
-    args = parser.parse_args()
-
-    # boto3 config setting
-    config = configparser.ConfigParser()
-    config.read("config.ini")
-
-    logger.debug(config.items("AWS"))
-
-    dynamodb = boto3.resource("dynamodb",
-        region_name=config.get("AWS", "REGION"),
-        aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"))
-
-    table = dynamodb.Table(args.table)
-
-    # truncate table
-    return truncate(table)
 
 
 def truncate(table):
@@ -78,8 +52,3 @@ def truncate(table):
             batch.delete_item(Key=key)
 
     return "{name} truncated".format(name=table.name)
-
-
-if __name__ == "__main__":
-    result = main()
-    print(result)

@@ -1,6 +1,4 @@
-import boto3
 import configparser
-import argparse
 from tqdm import tqdm
 import logging
 import csv
@@ -17,31 +15,6 @@ log_file.setFormatter(logging.Formatter(format))
 logger.addHandler(log_file)
 
 count = 0
-
-
-def main():
-    # arguments parse
-    parser = argparse.ArgumentParser(
-        description="import CSV file into DynamoDB table")
-    parser.add_argument("table", help="DynamoDB table name")
-    parser.add_argument("csv_file", help="UTF-8 CSV file path")
-    args = parser.parse_args()
-
-    # boto3 config setting
-    config = configparser.ConfigParser()
-    config.read("config.ini")
-
-    logger.debug(config.items("AWS"))
-
-    dynamodb = boto3.resource("dynamodb",
-        region_name=config.get("AWS", "REGION"),
-        aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"))
-
-    table = dynamodb.Table(args.table)
-
-    # csv import
-    return csv_import(table, args.csv_file)
 
 
 def csv_import(table, file):
@@ -118,8 +91,3 @@ def write_to_dynamo(table, rows):
     except Exception as e:
         logger.error(e)
         print("Error executing batch_writer")
-
-
-if __name__ == "__main__":
-    result = main()
-    print(result)
