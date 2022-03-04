@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@master
+
+      - name: Setup Python 🔧
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          architecture: x64
+
+      - name: Python Install dependencies 🧹
+        run: |
+          pip3 install -r requirements-dev.txt
+
+      - name: Run linter 👀
+        run: flake8
+
+      - name: Run test 🧪
+        run: pytest tests
