@@ -102,6 +102,7 @@ def csv_import(table, file):
         logger.error(e)
         return "CSV file can't read"
 
+
 def write_to_dynamo(table, rows):
     global count
 
