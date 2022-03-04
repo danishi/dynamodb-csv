@@ -1,18 +1,18 @@
 import configparser
 from tqdm import tqdm
-import logging
+# import logging
 import csv
 import json
 from decimal import Decimal
 
-logger = logging.getLogger("logger")
-logger.setLevel(logging.INFO)
+# logger = logging.getLogger("logger")
+# logger.setLevel(logging.INFO)
 
-log_file = logging.FileHandler("app/logs/dynamodb_import.log")
-format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
-log_file.setFormatter(logging.Formatter(format))
+# log_file = logging.FileHandler("app/logs/dynamodb_import.log")
+# format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
+# log_file.setFormatter(logging.Formatter(format))
 
-logger.addHandler(log_file)
+# logger.addHandler(log_file)
 
 count = 0
 
@@ -22,8 +22,8 @@ def csv_import(table, file):
     try:
         csv_spec = configparser.ConfigParser()
         csv_spec.read(f"{file}.spec")
-    except Exception as e:
-        logger.error(e)
+    except Exception:
+        # logger.error(e)
         return "CSV specification file can't read"
 
     # read csv
@@ -62,7 +62,7 @@ def csv_import(table, file):
                     else:
                         pass
 
-                logger.debug(row)
+                # logger.debug(row)
                 batch.append(row)
 
             if(len(batch)) > 0:
@@ -71,8 +71,8 @@ def csv_import(table, file):
         return "{name} csv imported {count} items".format(
             name=table.name, count=count)
 
-    except Exception as e:
-        logger.error(e)
+    except Exception:
+        # logger.error(e)
         return "CSV file can't read"
 
 
@@ -88,6 +88,6 @@ def write_to_dynamo(table, rows):
                     Item=rows[i]
                 )
                 count = count + 1
-    except Exception as e:
-        logger.error(e)
+    except Exception:
+        # logger.error(e)
         print("Error executing batch_writer")

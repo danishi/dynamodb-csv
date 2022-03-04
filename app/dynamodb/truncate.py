@@ -1,15 +1,15 @@
 from botocore.exceptions import ClientError
 from tqdm import tqdm
-import logging
+# import logging
 
-logger = logging.getLogger("logger")
-logger.setLevel(logging.INFO)
+# logger = logging.getLogger("logger")
+# logger.setLevel(logging.INFO)
 
-log_file = logging.FileHandler("app/logs/dynamodb_truncate.log")
-format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
-log_file.setFormatter(logging.Formatter(format))
+# log_file = logging.FileHandler("app/logs/dynamodb_truncate.log")
+# format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
+# log_file.setFormatter(logging.Formatter(format))
 
-logger.addHandler(log_file)
+# logger.addHandler(log_file)
 
 
 def truncate(table):
@@ -25,14 +25,14 @@ def truncate(table):
                 parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
             else:
                 break
-    except ClientError as e:
-        logger.error(e)
+    except ClientError:
+        # logger.error(e)
         return "aws client error"
-    except Exception as e:
-        logger.error(e)
+    except Exception:
+        # logger.error(e)
         return "table not found"
 
-    logger.debug(delete_items)
+    # logger.debug(delete_items)
     print("{name} scan {count} items".format(
         name=table.name, count=len(delete_items)))
 
@@ -41,8 +41,8 @@ def truncate(table):
     delete_keys = [{k: v for k, v in x.items() if k in key_names}
                    for x in delete_items]
 
-    logger.debug(key_names)
-    logger.debug(delete_keys)
+    # logger.debug(key_names)
+    # logger.debug(delete_keys)
 
     # delete all items
     with table.batch_writer() as batch:
