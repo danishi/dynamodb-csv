@@ -58,7 +58,7 @@ $ pip install -r requirements-dev.txt
 $ python app/main.py -h
 ```
 
-### Create your config.ini file
+### Create your config.ini file on current directory
 
 ```
 [AWS]
