@@ -1,15 +1,5 @@
 from botocore.exceptions import ClientError
 from tqdm import tqdm
-# import logging
-
-# logger = logging.getLogger("logger")
-# logger.setLevel(logging.INFO)
-
-# log_file = logging.FileHandler("app/logs/dynamodb_truncate.log")
-# format = "%(asctime)s %(levelname)s %(name)s :%(message)s"
-# log_file.setFormatter(logging.Formatter(format))
-
-# logger.addHandler(log_file)
 
 
 def truncate(table):
@@ -26,10 +16,8 @@ def truncate(table):
             else:
                 break
     except ClientError:
-        # logger.error(e)
         return "aws client error"
     except Exception:
-        # logger.error(e)
         return "table not found"
 
     # logger.debug(delete_items)
@@ -40,9 +28,6 @@ def truncate(table):
     key_names = [x["AttributeName"] for x in table.key_schema]
     delete_keys = [{k: v for k, v in x.items() if k in key_names}
                    for x in delete_items]
-
-    # logger.debug(key_names)
-    # logger.debug(delete_keys)
 
     # delete all items
     with table.batch_writer() as batch:
