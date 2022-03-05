@@ -1,3 +1,4 @@
+import os
 import boto3
 import configparser
 import argparse
@@ -27,15 +28,25 @@ def main():
     result = "No operations."
 
     # boto3 config setting
-    config = configparser.ConfigParser()
-    config.read("config.ini")
+    try:
+        config_file = "config.ini"
+        if not os.path.isfile(config_file):
+            raise ValueError(f"Please make your {config_file} file")
 
-    dynamodb = boto3.resource("dynamodb",
-        region_name=config.get("AWS", "REGION"),
-        aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"))
+        config = configparser.ConfigParser()
+        config.read(config_file)
 
-    table = dynamodb.Table(args.table)
+        dynamodb = boto3.resource("dynamodb",
+            region_name=config.get("AWS", "REGION"),
+            aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
+            aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"))
+
+        table = dynamodb.Table(args.table)
+    except ValueError as e:
+        return e
+
+    except Exception:
+        return f"Invalid format {config_file} file"
 
     # csv import
     if args.imp:
