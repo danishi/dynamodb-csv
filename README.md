@@ -67,7 +67,7 @@ AWS_SECRET_ACCESS_KEY=your_secret_key
 REGION=your_dynamodb_table_region
 ```
 
-### Create your CSV and CSV spec file.ini
+### Create your CSV and CSV spec file
 
 Prepare a UTF-8 CSV file of the format you want to import into your DynamoDB table and a file that defines that format.  
 

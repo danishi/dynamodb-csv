@@ -2,9 +2,9 @@ import boto3
 import configparser
 import argparse
 
-from dynamodb import csv_import, truncate
+from app.dynamodb import csv_import, truncate
 
-__version__ = "1.2.2"
+__version__ = "1.2.3"
 
 
 def main():
