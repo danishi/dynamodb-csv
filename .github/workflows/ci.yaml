@@ -29,4 +29,4 @@ jobs:
         run: flake8
 
       - name: Run test 🧪
-        run: pytest tests
+        run: pytest -s tests
