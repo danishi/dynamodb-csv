@@ -5,7 +5,7 @@ import argparse
 
 from app.dynamodb import csv_import, csv_export, truncate
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 
 def main():

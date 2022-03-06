@@ -4,13 +4,11 @@ on:
   push:
     branches:
       - master
+
 jobs:
   ci:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [14]
+    runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v2
@@ -18,7 +16,7 @@ jobs:
       - name: Setup Python 🔧
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.6
           architecture: x64
 
       - name: Python Install dependencies 🧹
