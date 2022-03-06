@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 config.ini
+sample_exp.csv

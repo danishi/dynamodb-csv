@@ -20,7 +20,6 @@ def truncate(table):
     except Exception:
         return "table not found"
 
-    # logger.debug(delete_items)
     print("{name} scan {count} items".format(
         name=table.name, count=len(delete_items)))
 

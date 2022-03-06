@@ -6,3 +6,4 @@ exclude =
 
 ignore =
     E128
+    E501

@@ -1,4 +1,4 @@
-from app.dynamodb import truncate
+from app.dynamodb import csv_export
 import boto3
 from moto import mock_dynamodb2
 import json
@@ -6,7 +6,7 @@ from decimal import Decimal
 
 
 @mock_dynamodb2
-def test_dynamodb_truncate():
+def test_dynamodb_csv_export():
     # Create mock DynamoDB table
     dynamodb = boto3.resource("dynamodb", region_name="ap-northeast-1")
     dynamodb.create_table(
@@ -52,7 +52,10 @@ def test_dynamodb_truncate():
             "DecimalListValues": [10, Decimal(str(10.5)), 20],
         })
 
-    result = truncate(table)
+    output_file = "sample_exp.csv"
+
+    result = csv_export(table, output_file)
     print(result)
 
-    assert result == "{name} truncated".format(name=table.name)
+    assert result == "{name} csv exported {count} items".format(
+        name=table.name, count=100)

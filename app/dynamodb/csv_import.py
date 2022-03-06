@@ -43,7 +43,7 @@ def csv_import(table, file):
                     elif spec == "B":  # Boolean
                         row[key] = bool(row[key])
                     elif spec == "J":  # Json
-                        row[key] = json.loads(row[key])
+                        row[key] = json.loads(row[key], parse_float=Decimal)
                     elif spec == "SL":  # StringList
                         row[key] = row[key].split()
                     elif spec == "DL":  # DecimalList
