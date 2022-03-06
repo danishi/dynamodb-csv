@@ -5,8 +5,8 @@
 ![Python](https://img.shields.io/badge/Python-3.8-1384C5.svg)
 [![PyPI](https://badge.fury.io/py/dynamodb-csv.svg)](https://badge.fury.io/py/dynamodb-csv)
 [![Downloads](https://pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
-[![Downloads](https://pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
-[![Downloads](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
+[![Downloads week](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
+[![Downloads month](https://pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
 
 A utility that allows CSV import / export to DynamoDB on the command line
 
