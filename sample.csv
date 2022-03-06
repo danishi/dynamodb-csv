@@ -1,7 +1,7 @@
 StringPK,NumberSK,DecimalValue,BooleanValue,NullValue,JsonValue,StringListValues,DecimalListValues
 foo,1,1.23,TRUE,,"[{""string"" : ""value""},{""number"" : 100}]",foo bar baz,10 10.1 20
 foo,2,0.001,,,"[{""boolean"" : true}]",リンゴ バナナ スイカ,10 10.1 20
-foo,3,1,,,"[{""boolean"" : false}]",,
+foo,3,1,,,"[{""float"" : 10.11}]",,
 bar,1,100.01,,,"{""foo"" : 1 ,""bar"" : 2}",foo bar baz,10 10.1 20
 bar,2,100.01,,,"{""foo"" : 1 ,""bar"" : 2}",foo bar baz,10 10.1 20
 bar,3,100.01,,,"{""foo"" : 1 ,""bar"" : 2}",foo bar baz,10 10.1 20

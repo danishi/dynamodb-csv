@@ -3,9 +3,9 @@ import boto3
 import configparser
 import argparse
 
-from app.dynamodb import csv_import, truncate
+from app.dynamodb import csv_import, csv_export, truncate
 
-__version__ = "1.2.3"
+__version__ = "1.3.0"
 
 
 def main():
@@ -18,11 +18,15 @@ def main():
     parser.add_argument(
         "-i", "--imp", help="mode import", action="store_true")
     parser.add_argument(
+        "-e", "--exp", help="mode export", action="store_true")
+    parser.add_argument(
         "--truncate", help="mode truncate", action="store_true")
     parser.add_argument(
         "-t", "--table", help="DynamoDB table name", required=True)
     parser.add_argument(
         "-f", "--file", help="UTF-8 CSV file path required import mode")
+    parser.add_argument(
+        "-o", "--output", help="output file path required export mode")
     args = parser.parse_args()
 
     result = "No operations."
@@ -53,7 +57,14 @@ def main():
         if args.file is not None:
             result = csv_import(table, args.file)
         else:
-            result = "Import mode requires a file option."
+            result = "Import mode requires a input file option."
+
+    # csv export
+    if args.exp:
+        if args.output is not None:
+            result = csv_export(table, args.output)
+        else:
+            result = "Export mode requires a output file option."
 
     # truncate table
     if args.truncate:
