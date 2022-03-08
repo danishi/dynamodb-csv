@@ -1,7 +1,11 @@
 {
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+  // "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "terminal.integrated.scrollback": 10000,
+  "extensions.ignoreRecommendations": false,
+  "python.testing.pytestArgs": [
+      "tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

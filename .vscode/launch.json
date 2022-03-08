@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+          "name": "DynamoDB import",
+          "type": "python",
+          "request": "launch",
+          "program": "app/main.py",
+          "console": "integratedTerminal",
+          "args": [
+            "--imp",
+            "-t",
+            "my_table",
+            "-f",
+            "sample.csv"
+          ],
+          "justMyCode": true,
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        {
+          "name": "DynamoDB export",
+          "type": "python",
+          "request": "launch",
+          "program": "app/main.py",
+          "console": "integratedTerminal",
+          "args": [
+            "--exp",
+            "-t",
+            "my_table",
+            "-o",
+            "sample_exp.csv"
+          ],
+          "justMyCode": true,
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        {
+            "name": "DynamoDB truncate",
+            "type": "python",
+            "request": "launch",
+            "program": "app/main.py",
+            "console": "integratedTerminal",
+            "args": [
+              "--truncate",
+              "-t",
+              "my_table"
+            ],
+            "justMyCode": true,
+            "env": {
+              "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}
