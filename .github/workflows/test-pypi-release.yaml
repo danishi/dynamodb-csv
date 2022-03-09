@@ -1,0 +1,39 @@
+name: test-pypi-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "ref"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # <= https://github.com/actions/checkout/issues/265
+      - run: git checkout ${{ github.event.inputs.ref }}
+        if: ${{ github.event.inputs.ref != '' }}
+
+      - name: Setup Python 🔧
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+          architecture: x64
+
+      - name: Python Install dependencies 🧹
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+
+      - name: Test build and publish 🎁
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload --repository pypitest dist/*
