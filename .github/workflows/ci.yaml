@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    name: Python ${{ matrix.node_version }} on ${{ matrix.os }}
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
