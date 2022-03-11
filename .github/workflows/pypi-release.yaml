@@ -7,17 +7,22 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version: [3.6]
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v2
 
-      - name: Setup Python 🔧
+      - name: Setup Python ${{ matrix.python-version }} 🔧
         uses: actions/setup-python@v2
         with:
-          python-version: 3.6
-          architecture: x64
+          python-version: ${{ matrix.python-version }}
 
       - name: Python Install dependencies 🧹
         run: |

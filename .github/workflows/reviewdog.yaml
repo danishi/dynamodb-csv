@@ -6,6 +6,7 @@ jobs:
   flake8-lint:
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       matrix:
         python-version: [3.6]
