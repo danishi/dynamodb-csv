@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "alefragnani.bookmarks",
+    "CoenraadS.bracket-pair-colorizer",
+    "sohamkamani.code-eol",
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "oderwat.indent-rainbow",
+    "shd101wyy.markdown-preview-enhanced",
+    "christian-kohler.path-intellisense",
+    "ms-python.python",
+    "redhat.vscode-yaml",
+    "visualstudioexptteam.vscodeintellicode"
+  ]
+}
