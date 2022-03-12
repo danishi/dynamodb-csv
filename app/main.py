@@ -38,19 +38,25 @@ def main():
             raise ValueError(f"Please make your {config_file} file")
 
         config = configparser.ConfigParser()
+        config.read_dict({"AWS": {"ENDPOINT_URL": ""}})
         config.read(config_file)
 
+        endpoint_url = None
+        if config.get("AWS", "ENDPOINT_URL"):
+            endpoint_url = config.get("AWS", "ENDPOINT_URL")
         dynamodb = boto3.resource("dynamodb",
             region_name=config.get("AWS", "REGION"),
             aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-            aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"))
+            aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"),
+            endpoint_url=endpoint_url)
 
         table = dynamodb.Table(args.table)
     except ValueError as e:
         return e
 
-    except Exception:
-        return f"Invalid format {config_file} file"
+    except Exception as e:
+        # return f"Invalid format {config_file} file"
+        return e
 
     # csv import
     if args.imp:

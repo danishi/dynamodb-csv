@@ -61,6 +61,8 @@ $ pip install -r requirements-dev.txt
 $ python app/main.py -h
 ```
 
+Or you can use devcontainer.
+
 ### Create your config.ini file on current directory
 
 ```ini
@@ -68,6 +70,8 @@ $ python app/main.py -h
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 REGION=your_dynamodb_table_region
+# Option
+#ENDPOINT_URL=http://dynamodb-local:8000
 ```
 
 ### Create your CSV and CSV spec file

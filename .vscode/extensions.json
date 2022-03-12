@@ -1,5 +1,7 @@
 {
   "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
     "alefragnani.bookmarks",
     "CoenraadS.bracket-pair-colorizer",
     "sohamkamani.code-eol",
@@ -10,7 +12,6 @@
     "oderwat.indent-rainbow",
     "shd101wyy.markdown-preview-enhanced",
     "christian-kohler.path-intellisense",
-    "ms-python.python",
     "redhat.vscode-yaml",
     "visualstudioexptteam.vscodeintellicode"
   ]

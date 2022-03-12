@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  workspace:
+    container_name: workspace
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - VARIANT=3.8
+    volumes:
+      - ../:/workspace/
+    tty: true
+
+  dynamodb-local:
+    container_name: dynamodb-local
+    image: amazon/dynamodb-local:latest
+    ports:
+      - "8000:8000"
+    command: "-jar DynamoDBLocal.jar -inMemory -sharedDb"
