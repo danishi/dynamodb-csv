@@ -2,4 +2,5 @@
 flake8
 autopep8
 pytest
+pytest-sugar
 moto
