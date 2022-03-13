@@ -32,4 +32,4 @@ jobs:
         run: flake8
 
       - name: Run test 🧪
-        run: pytest -s tests
+        run: pytest
