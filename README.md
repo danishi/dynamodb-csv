@@ -198,3 +198,5 @@ my_table truncated
 ## License
 
 See [LICENSE](LICENSE)
+
+test
