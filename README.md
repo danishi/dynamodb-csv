@@ -1,7 +1,5 @@
 # DynamoDB CSV utility
 
-![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fdanishi%2FDynamoDBCSV)
-![GitHub Repo stars](https://img.shields.io/github/stars/danishi/DynamoDBImportCSV?style=social)
 [![ci](https://github.com/danishi/DynamoDBCSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDBCSV)
 ![Python](https://img.shields.io/badge/Python-3.6-1384C5.svg)
