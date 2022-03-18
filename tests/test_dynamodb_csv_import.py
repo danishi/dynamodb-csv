@@ -1,11 +1,12 @@
 from app.dynamodb import csv_import
+from typing import Any
 
 
-def test_dynamodb_csv_import(table):
+def test_dynamodb_csv_import(table: Any):
     """Unit test csv import into DynamoDB table
 
     Args:
-        table (Table): boto3 DynamoDB table mock object
+        table (Any): boto3 DynamoDB table mock object
     """
 
     csv_file = "sample.csv"

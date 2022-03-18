@@ -4,9 +4,10 @@ from tqdm import tqdm
 import csv
 import json
 from decimal import Decimal
+from typing import Any
 
 
-def csv_export(table, file):
+def csv_export(table: Any, file: str):
     """Export DynamoDB table to csv
 
     Args:
@@ -90,7 +91,7 @@ def csv_export(table, file):
         return str(e)
 
 
-def decimal_encode(obj):
+def decimal_encode(obj: Any):
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError
