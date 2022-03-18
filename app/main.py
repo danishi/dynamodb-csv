@@ -9,6 +9,15 @@ __version__ = "1.3.2"
 
 
 def main():
+    """Main routine
+
+    Raises:
+        ValueError: invalied config
+
+    Returns:
+        str: result message
+    """
+
     # arguments parse
     parser = argparse.ArgumentParser(
         description="Import CSV file into DynamoDB table utilities")

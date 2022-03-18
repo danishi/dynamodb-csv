@@ -3,6 +3,15 @@ from tqdm import tqdm
 
 
 def truncate(table):
+    """DynamoDB table truncate
+
+    Args:
+        table (Table): boto3 DynamoDB table object
+
+    Returns:
+        str: result message
+    """
+
     # all scan delete items
     delete_items = []
     parameters = {}

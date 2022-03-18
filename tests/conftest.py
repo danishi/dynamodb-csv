@@ -9,6 +9,12 @@ size = 1000
 
 @pytest.fixture
 def table():
+    """Create DynamoDB table mock
+
+    Yields:
+        Table: boto3 DynamoDB table mock object
+    """
+
     print("Create mock DynamoDB table")
     with mock_dynamodb2():
         dynamodb = boto3.resource("dynamodb", region_name="ap-northeast-1")
