@@ -8,6 +8,16 @@ count = 0
 
 
 def csv_import(table, file):
+    """csv import into DynamoDB table
+
+    Args:
+        table (Table): boto3 DynamoDB table object
+        file (str): csv file path
+
+    Returns:
+        str: result message
+    """
+
     # read csv spec
     try:
         csv_spec = configparser.ConfigParser()

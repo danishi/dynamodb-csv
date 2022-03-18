@@ -7,6 +7,16 @@ from decimal import Decimal
 
 
 def csv_export(table, file):
+    """Export DynamoDB table to csv
+
+    Args:
+        table (Table): boto3 DynamoDB table object
+        file (str): csv file path
+
+    Returns:
+        _type_: result message
+    """
+
     # read csv spec
     try:
         csv_spec = configparser.ConfigParser()
