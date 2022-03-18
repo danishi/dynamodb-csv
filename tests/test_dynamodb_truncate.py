@@ -1,11 +1,12 @@
 from app.dynamodb import truncate
+from typing import Any
 
 
-def test_dynamodb_truncate(table):
+def test_dynamodb_truncate(table: Any):
     """Unit test DynamoDB table truncate
 
     Args:
-        table (Table): boto3 DynamoDB table mock object
+        table (Any): boto3 DynamoDB table mock object
     """
 
     result = truncate(table)

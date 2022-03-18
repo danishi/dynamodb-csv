@@ -1,12 +1,13 @@
 from botocore.exceptions import ClientError
 from tqdm import tqdm
+from typing import Any
 
 
-def truncate(table):
+def truncate(table: Any):
     """DynamoDB table truncate
 
     Args:
-        table (Table): boto3 DynamoDB table object
+        table (Any): boto3 DynamoDB table object
 
     Returns:
         str: result message

@@ -1,11 +1,12 @@
 from app.dynamodb import csv_export
+from typing import Any
 
 
-def test_dynamodb_csv_export(table):
+def test_dynamodb_csv_export(table: Any):
     """Unit test export DynamoDB table to csv
 
     Args:
-        table (Table): boto3 DynamoDB table mock object
+        table (Any): boto3 DynamoDB table mock object
     """
 
     size = 1000

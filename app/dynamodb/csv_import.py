@@ -3,15 +3,16 @@ from tqdm import tqdm
 import csv
 import json
 from decimal import Decimal
+from typing import Any, Dict
 
 count = 0
 
 
-def csv_import(table, file):
+def csv_import(table: Any, file: str):
     """csv import into DynamoDB table
 
     Args:
-        table (Table): boto3 DynamoDB table object
+        table (Any): boto3 DynamoDB table object
         file (str): csv file path
 
     Returns:
@@ -73,7 +74,13 @@ def csv_import(table, file):
         return "CSV file can't read"
 
 
-def write_to_dynamo(table, rows):
+def write_to_dynamo(table: Any, rows: Dict):
+    """csv rows into DynamoDB
+
+    Args:
+        table (Any): boto3 DynamoDB table object
+        rows (Dict): csv rows
+    """
     global count
 
     try:
