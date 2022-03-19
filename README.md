@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/danishi/DynamoDB-CSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDB-CSV)
-![Python](https://img.shields.io/badge/Python-3.6-1384C5.svg)
+![Supported Python versions](https://img.shields.io/pypi/pyversions/dynamodb-csv.svg?color=%2334D058)
 [![PyPI](https://badge.fury.io/py/dynamodb-csv.svg)](https://badge.fury.io/py/dynamodb-csv)
 [![Downloads](https://pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
 [![Downloads week](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
