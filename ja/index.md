@@ -6,4 +6,8 @@
 ### 言語
 
 * [日本語](https://danishi.github.io/dynamodb-csv/ja/)
-* [英語](https://danishi.github.io/dynamodb-csv/en/)
+* [英語](https://danishi.github.io/dynamodb-csv/en/)(Google翻訳)
+
+### コンテンツ
+
+準備中...
