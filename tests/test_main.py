@@ -27,6 +27,8 @@ def test_parse_args_import(mocker: Any):
     mocker.patch("sys.argv", [
         "dynamodb-csv", "-i", "-t", "test_table"
     ])
+    mocker.patch("os.path.isfile", return_value=True)
+    mocker.patch("app.main.config_read_and_get_table", return_value=True)
     result = main.main()
 
     assert result == "Import mode requires a input file option."
@@ -42,6 +44,8 @@ def test_parse_args_export(mocker: Any):
     mocker.patch("sys.argv", [
         "dynamodb-csv", "-e", "-t", "test_table"
     ])
+    mocker.patch("os.path.isfile", return_value=True)
+    mocker.patch("app.main.config_read_and_get_table", return_value=True)
     result = main.main()
 
     assert result == "Export mode requires a output file option."
@@ -61,3 +65,19 @@ def test_config_file_not_exists(mocker: Any):
     result = main.main()
 
     assert result == "Please make your config.ini file"
+
+
+def test_config_file_invalid(mocker: Any):
+    """Unit test config file invalid format
+
+    Args:
+        mocker (Any): mock object
+    """
+
+    mocker.patch("sys.argv", [
+        "dynamodb-csv", "-i", "-t", "test_table", "-f", "sample.csv"
+    ])
+    mocker.patch("os.path.isfile", return_value=True)
+    result = main.main()
+
+    assert result == "Invalid format config.ini file"
