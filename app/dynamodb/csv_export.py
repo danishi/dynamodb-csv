@@ -15,7 +15,7 @@ def csv_export(table: Any, file: str):
         file (str): csv file path
 
     Returns:
-        _type_: result message
+        str: result message
     """
 
     # read csv spec

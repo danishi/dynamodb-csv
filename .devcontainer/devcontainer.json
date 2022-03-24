@@ -66,7 +66,7 @@
   // },
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  // "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
 
   // Use 'postStartCommand' to run commands after the container is started.
   "postStartCommand": "./.devcontainer/postCreateCommand.sh",

@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb2
+from moto import mock_dynamodb
 import json
 from decimal import Decimal
 import pytest
@@ -16,7 +16,7 @@ def table():
     """
 
     print("Create mock DynamoDB table")
-    with mock_dynamodb2():
+    with mock_dynamodb():
         dynamodb = boto3.resource("dynamodb", region_name="ap-northeast-1")
         dynamodb.create_table(
             TableName="my_table",

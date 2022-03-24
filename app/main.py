@@ -2,6 +2,7 @@ import os
 import boto3
 import configparser
 import argparse
+import sys
 
 from app.dynamodb import csv_import, csv_export, truncate
 
@@ -18,27 +19,10 @@ def main():
         str: result message
     """
 
-    # arguments parse
-    parser = argparse.ArgumentParser(
-        description="Import CSV file into DynamoDB table utilities")
-    parser.add_argument("-v", "--version", action="version",
-                        version=__version__,
-                        help="show version")
-    parser.add_argument(
-        "-i", "--imp", help="mode import", action="store_true")
-    parser.add_argument(
-        "-e", "--exp", help="mode export", action="store_true")
-    parser.add_argument(
-        "--truncate", help="mode truncate", action="store_true")
-    parser.add_argument(
-        "-t", "--table", help="DynamoDB table name", required=True)
-    parser.add_argument(
-        "-f", "--file", help="UTF-8 CSV file path required import mode")
-    parser.add_argument(
-        "-o", "--output", help="output file path required export mode")
-    args = parser.parse_args()
-
     result = "No operations."
+
+    # arguments parse
+    args = parse_args(sys.argv[1:])
 
     # boto3 config setting
     try:
@@ -61,11 +45,10 @@ def main():
 
         table = dynamodb.Table(args.table)
     except ValueError as e:
-        return e
+        return str(e)
 
-    except Exception as e:
-        # return f"Invalid format {config_file} file"
-        return e
+    except Exception:
+        return f"Invalid format {config_file} file"
 
     # csv import
     if args.imp:
@@ -86,6 +69,36 @@ def main():
         result = truncate(table)
 
     return result
+
+
+def parse_args(args: str):
+    """_summary_
+
+    Args:
+        args (str): _description_
+
+    Returns:
+        Any: parsed args
+    """
+    parser = argparse.ArgumentParser(
+        description="Import CSV file into DynamoDB table utilities")
+    parser.add_argument("-v", "--version", action="version",
+                        version=__version__,
+                        help="show version")
+    parser.add_argument(
+        "-i", "--imp", help="mode import", action="store_true")
+    parser.add_argument(
+        "-e", "--exp", help="mode export", action="store_true")
+    parser.add_argument(
+        "--truncate", help="mode truncate", action="store_true")
+    parser.add_argument(
+        "-t", "--table", help="DynamoDB table name", required=True)
+    parser.add_argument(
+        "-f", "--file", help="UTF-8 CSV file path required import mode")
+    parser.add_argument(
+        "-o", "--output", help="output file path required export mode")
+
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
