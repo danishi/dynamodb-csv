@@ -3,12 +3,13 @@ from moto import mock_dynamodb
 import json
 from decimal import Decimal
 import pytest
+from typing import Any
 
 size = 1000
 
 
 @pytest.fixture
-def table():
+def table() -> Any:
     """Create DynamoDB table mock
 
     Yields:

@@ -11,7 +11,7 @@ __version__ = "1.3.3"
 config_file = "config.ini"
 
 
-def main():
+def main() -> str:
     """Main routine
 
     Raises:
@@ -56,7 +56,7 @@ def main():
     return result
 
 
-def parse_args(args: str):
+def parse_args(args: str) -> Any:
     """Parse arguments
 
     Args:
@@ -86,7 +86,7 @@ def parse_args(args: str):
     return parser.parse_args()
 
 
-def config_read_and_get_table(args: Any):
+def config_read_and_get_table(args: Any) -> Any:
     """Config read and Create DynamoDB table instance
 
     Args:
