@@ -15,8 +15,8 @@ A utility that allows CSV import / export to DynamoDB on the command line
 ## Introduction
 
 I wrote this script because there was no tool to satisfy my modest desire to make it easy to import CSV files into DynamoDB.  
-Written in a simple Python script, it should be easy to parse and modify.  
-  
+Written in a simple Python script, it should be easy to parse and modify.
+
 it works for me.
 
 ## Getting started
@@ -45,7 +45,7 @@ optional arguments:
                         output file path required export mode
 ```
 
-### Install for developer 
+### Install for developer
 
 ```shell
 $ python -m venv venv
@@ -78,13 +78,14 @@ REGION=your_dynamodb_table_region
 
 ### Create your CSV and CSV spec file
 
-Prepare a UTF-8 CSV file of the format you want to import into your DynamoDB table and a file that defines that format.  
+Prepare a UTF-8 CSV file of the format you want to import into your DynamoDB table and a file that defines that format.
 
 #### For example
 
 Please refer to this writing method.
 
 [sample.csv](sample.csv)
+
 ```csv
 StringPK,NumberSK,DecimalValue,BooleanValue,NullValue,JsonValue,StringListValues,DecimalListValues
 foo,1,1.23,TRUE,,"[{""string"" : ""value""},{""number"" : 100}]",foo bar baz,10 10.1 20
@@ -93,6 +94,7 @@ foo,3,1,,,"[{""boolean"" : false}]",,
 ```
 
 [sample.csv.spec](sample.csv.spec)
+
 ```ini
 # sample.csv data format specification
 
@@ -162,7 +164,7 @@ $ aws dynamodb describe-table --table-name my_table
 
 ### CSV import into Table
 
-This command requires a CSV spec file in the same directory.  
+This command requires a CSV spec file in the same directory.
 
 ```shell
 $ dynamodb-csv -i -t my_table -f sample.csv
@@ -179,7 +181,7 @@ Therefore, data can be exported.
 As with import, you need a CSV spec file.
 
 ```shell
-$ dynamodb-csv -e -t my_table -o sample_exp.csv 
+$ dynamodb-csv -e -t my_table -o sample_exp.csv
 please wait my_table exporting sample_exp.csv
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 16666.77it/s]
 my_table csv exported 300 items
@@ -200,3 +202,11 @@ my_table truncated
 ## License
 
 See [LICENSE](LICENSE)
+
+## Special Thanks
+
+### Code contributors
+
+<a href="https://github.com/danishi/dynamodb-csv/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=danishi/dynamodb-csv" />
+</a>
