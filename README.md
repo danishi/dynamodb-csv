@@ -14,8 +14,8 @@ A utility that allows CSV import / export to DynamoDB on the command line
 
 ## Introduction
 
-I wrote this script because there was no tool to satisfy my modest desire to make it easy to import CSV files into DynamoDB.  
-Written in a simple Python script, it should be easy to parse and modify.
+I made this command because I didn't have any tools to satisfy my modest desire to make it easy to import CSV files into DynamoDB.
+Written in a simple Python script, it's easy to parse and modify.
 
 it works for me.
 
