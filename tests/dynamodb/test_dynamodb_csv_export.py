@@ -2,7 +2,7 @@ from app.dynamodb import csv_export
 from typing import Any
 
 
-def test_dynamodb_csv_export(table: Any):
+def test_dynamodb_csv_export(table: Any) -> None:
     """Unit test export DynamoDB table to csv
 
     Args:

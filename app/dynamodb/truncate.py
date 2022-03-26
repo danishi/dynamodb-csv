@@ -3,7 +3,7 @@ from tqdm import tqdm
 from typing import Any
 
 
-def truncate(table: Any):
+def truncate(table: Any) -> str:
     """DynamoDB table truncate
 
     Args:
@@ -36,7 +36,7 @@ def truncate(table: Any):
     # get key attribute name and item delete keys
     key_names = [x["AttributeName"] for x in table.key_schema]
     delete_keys = [{k: v for k, v in x.items() if k in key_names}
-                   for x in delete_items]
+                for x in delete_items]
 
     # delete all items
     with table.batch_writer() as batch:

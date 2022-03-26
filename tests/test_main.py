@@ -3,7 +3,7 @@ from typing import Any
 import pytest
 
 
-def test_parse_args_version(mocker: Any):
+def test_parse_args_version(mocker: Any) -> None:
     """Unit test argparse
 
     Args:
@@ -17,7 +17,7 @@ def test_parse_args_version(mocker: Any):
     assert e.value.code == 0
 
 
-def test_parse_args_import(mocker: Any):
+def test_parse_args_import(mocker: Any) -> None:
     """Unit test argparse mode import
 
     Args:
@@ -34,7 +34,7 @@ def test_parse_args_import(mocker: Any):
     assert result == "Import mode requires a input file option."
 
 
-def test_parse_args_export(mocker: Any):
+def test_parse_args_export(mocker: Any) -> None:
     """Unit test argparse mode export
 
     Args:
@@ -51,7 +51,7 @@ def test_parse_args_export(mocker: Any):
     assert result == "Export mode requires a output file option."
 
 
-def test_config_file_not_exists(mocker: Any):
+def test_config_file_not_exists(mocker: Any) -> None:
     """Unit test config file not exists
 
     Args:
@@ -67,7 +67,7 @@ def test_config_file_not_exists(mocker: Any):
     assert result == "Please make your config.ini file"
 
 
-def test_config_file_invalid(mocker: Any):
+def test_config_file_invalid(mocker: Any) -> None:
     """Unit test config file invalid format
 
     Args:

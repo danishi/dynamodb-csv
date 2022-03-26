@@ -7,7 +7,7 @@ from decimal import Decimal
 from typing import Any
 
 
-def csv_export(table: Any, file: str):
+def csv_export(table: Any, file: str) -> str:
     """Export DynamoDB table to csv
 
     Args:
@@ -91,7 +91,7 @@ def csv_export(table: Any, file: str):
         return str(e)
 
 
-def decimal_encode(obj: Any):
+def decimal_encode(obj: Any) -> float:
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError

@@ -8,7 +8,7 @@ from typing import Any, Dict
 count = 0
 
 
-def csv_import(table: Any, file: str):
+def csv_import(table: Any, file: str) -> str:
     """csv import into DynamoDB table
 
     Args:
@@ -74,7 +74,7 @@ def csv_import(table: Any, file: str):
         return "CSV file can't read"
 
 
-def write_to_dynamo(table: Any, rows: Dict):
+def write_to_dynamo(table: Any, rows: Dict) -> None:
     """csv rows into DynamoDB
 
     Args:

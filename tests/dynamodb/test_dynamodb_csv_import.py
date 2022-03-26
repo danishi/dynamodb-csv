@@ -2,7 +2,7 @@ from app.dynamodb import csv_import
 from typing import Any
 
 
-def test_dynamodb_csv_import(table: Any):
+def test_dynamodb_csv_import(table: Any) -> None:
     """Unit test csv import into DynamoDB table
 
     Args:
