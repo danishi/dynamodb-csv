@@ -8,8 +8,8 @@ on:
       - "**.md"
 
 jobs:
-  ci:
-    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+  unit_tests:
+    name: Unit tests Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
@@ -35,6 +35,24 @@ jobs:
 
       - name: Run unit tests 🧪
         run: pytest
+
+  run_commands:
+    name: Run commands Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }} 🔧
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dynamodb-csv 💉
         run: |
