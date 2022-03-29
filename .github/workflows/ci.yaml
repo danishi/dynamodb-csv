@@ -59,7 +59,7 @@ jobs:
       - name: Run commands 🚀
         run: |
           cp config.ini.example config.ini
-          echo "ENDPOINT_URL=http://localhost:8000" > config.ini
+          echo "ENDPOINT_URL=http://localhost:8000" >> config.ini
           dynamodb-csv -i -t my_table -f sample.csv
           dynamodb-csv -e -t my_table -o sample_exp.csv
           dynamodb-csv --truncate -t my_table
