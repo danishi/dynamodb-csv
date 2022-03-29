@@ -3,7 +3,7 @@ import boto3
 import configparser
 import argparse
 import sys
-from typing import Any
+from typing import Any, Tuple
 
 from app.dynamodb import csv_import, csv_export, truncate
 
@@ -11,14 +11,22 @@ __version__ = "1.3.3"
 config_file = "config.ini"
 
 
-def main() -> str:
+def main() -> None:
     """Main routine
+    """
+    (message, code) = execute()
+    print(message)
+    sys.exit(code)
+
+
+def execute() -> Tuple:
+    """Command execute
 
     Raises:
         ValueError: invalied config
 
     Returns:
-        str: result message
+        Tuple: result message and exit code
     """
 
     result = "No operations."
@@ -30,24 +38,24 @@ def main() -> str:
     try:
         table = config_read_and_get_table(args)
     except ValueError as e:
-        return str(e)
+        return (str(e), 1)
 
     except Exception:
-        return f"Invalid format {config_file} file"
+        return (f"Invalid format {config_file} file", 1)
 
     # csv import
     if args.imp:
         if args.file is not None:
             result = csv_import(table, args.file)
         else:
-            result = "Import mode requires a input file option."
+            return ("Import mode requires a input file option.", 1)
 
     # csv export
     if args.exp:
         if args.output is not None:
             result = csv_export(table, args.output)
         else:
-            result = "Export mode requires a output file option."
+            return ("Export mode requires a output file option.", 1)
 
     # truncate table
     if args.truncate:
@@ -116,5 +124,4 @@ def config_read_and_get_table(args: Any) -> Any:
 
 
 if __name__ == "__main__":
-    result = main()
-    print(result)
+    main()

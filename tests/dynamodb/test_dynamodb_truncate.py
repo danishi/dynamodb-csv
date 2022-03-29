@@ -12,4 +12,4 @@ def test_dynamodb_truncate(table: Any) -> None:
     result = truncate(table)
     print(result)
 
-    assert result == "{name} truncated".format(name=table.name)
+    assert result[0] == "{name} truncated".format(name=table.name)

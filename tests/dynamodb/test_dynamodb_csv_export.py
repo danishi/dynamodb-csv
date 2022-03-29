@@ -15,5 +15,5 @@ def test_dynamodb_csv_export(table: Any) -> None:
     result = csv_export(table, output_file)
     print(result)
 
-    assert result == "{name} csv exported {count} items".format(
+    assert result[0] == "{name} csv exported {count} items".format(
         name=table.name, count=size)

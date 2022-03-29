@@ -12,7 +12,7 @@ def test_parse_args_version(mocker: Any) -> None:
 
     mocker.patch("sys.argv", ["dynamodb-csv", "-v"])
     with pytest.raises(SystemExit) as e:
-        main.main()
+        main.execute()
 
     assert e.value.code == 0
 
@@ -29,9 +29,9 @@ def test_parse_args_import(mocker: Any) -> None:
     ])
     mocker.patch("os.path.isfile", return_value=True)
     mocker.patch("app.main.config_read_and_get_table", return_value=True)
-    result = main.main()
+    result = main.execute()
 
-    assert result == "Import mode requires a input file option."
+    assert result[0] == "Import mode requires a input file option."
 
 
 def test_parse_args_export(mocker: Any) -> None:
@@ -46,9 +46,9 @@ def test_parse_args_export(mocker: Any) -> None:
     ])
     mocker.patch("os.path.isfile", return_value=True)
     mocker.patch("app.main.config_read_and_get_table", return_value=True)
-    result = main.main()
+    result = main.execute()
 
-    assert result == "Export mode requires a output file option."
+    assert result[0] == "Export mode requires a output file option."
 
 
 def test_config_file_not_exists(mocker: Any) -> None:
@@ -62,9 +62,9 @@ def test_config_file_not_exists(mocker: Any) -> None:
         "dynamodb-csv", "-i", "-t", "test_table", "-f", "sample.csv"
     ])
     mocker.patch("os.path.isfile", return_value=False)
-    result = main.main()
+    result = main.execute()
 
-    assert result == "Please make your config.ini file"
+    assert result[0] == "Please make your config.ini file"
 
 
 def test_config_file_invalid(mocker: Any) -> None:
@@ -78,6 +78,6 @@ def test_config_file_invalid(mocker: Any) -> None:
         "dynamodb-csv", "-i", "-t", "test_table", "-f", "sample.csv"
     ])
     mocker.patch("os.path.isfile", return_value=True)
-    result = main.main()
+    result = main.execute()
 
-    assert result == "Invalid format config.ini file"
+    assert result[0] == "Invalid format config.ini file"

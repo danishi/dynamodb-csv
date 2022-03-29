@@ -14,5 +14,5 @@ def test_dynamodb_csv_import(table: Any) -> None:
     result = csv_import(table, csv_file)
     print(result)
 
-    assert result == "{name} csv imported {count} items".format(
+    assert result[0] == "{name} csv imported {count} items".format(
         name=table.name, count=300)
