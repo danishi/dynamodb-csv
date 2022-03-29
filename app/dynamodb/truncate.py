@@ -1,16 +1,16 @@
 from botocore.exceptions import ClientError
 from tqdm import tqdm
-from typing import Any
+from typing import Any, Tuple
 
 
-def truncate(table: Any) -> str:
+def truncate(table: Any) -> Tuple:
     """DynamoDB table truncate
 
     Args:
         table (Any): boto3 DynamoDB table object
 
     Returns:
-        str: result message
+        Tuple: result message and exit code
     """
 
     # all scan delete items
@@ -26,9 +26,9 @@ def truncate(table: Any) -> str:
             else:
                 break
     except ClientError:
-        return "aws client error"
+        return ("aws client error", 1)
     except Exception:
-        return "table not found"
+        return ("table not found", 1)
 
     print("{name} scan {count} items".format(
         name=table.name, count=len(delete_items)))
@@ -45,4 +45,4 @@ def truncate(table: Any) -> str:
         for key in tqdm(delete_keys):
             batch.delete_item(Key=key)
 
-    return "{name} truncated".format(name=table.name)
+    return ("{name} truncated".format(name=table.name), 0)

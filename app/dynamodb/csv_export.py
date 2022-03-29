@@ -4,10 +4,10 @@ from tqdm import tqdm
 import csv
 import json
 from decimal import Decimal
-from typing import Any
+from typing import Any, Tuple
 
 
-def csv_export(table: Any, file: str) -> str:
+def csv_export(table: Any, file: str) -> Tuple:
     """Export DynamoDB table to csv
 
     Args:
@@ -15,7 +15,7 @@ def csv_export(table: Any, file: str) -> str:
         file (str): csv file path
 
     Returns:
-        str: result message
+        Tuple: result message and exit code
     """
 
     # read csv spec
@@ -23,7 +23,7 @@ def csv_export(table: Any, file: str) -> str:
         csv_spec = configparser.ConfigParser()
         csv_spec.read(f"{file}.spec")
     except Exception:
-        return "CSV specification file can't read"
+        return ("CSV specification file can't read", 1)
 
     # write csv
     try:
@@ -44,9 +44,9 @@ def csv_export(table: Any, file: str) -> str:
                         break
 
             except ClientError:
-                return "aws client error"
+                return ("aws client error", 1)
             except Exception:
-                return "table not found"
+                return ("table not found", 1)
 
             is_write_csv_header_labels = False
             for item in tqdm(export_items):
@@ -81,14 +81,14 @@ def csv_export(table: Any, file: str) -> str:
 
                 writer.writerow(item)
 
-        return "{name} csv exported {count} items".format(
-            name=table.name, count=len(export_items))
+        return ("{name} csv exported {count} items".format(
+            name=table.name, count=len(export_items)), 0)
 
     except IOError:
         print("I/O error")
 
     except Exception as e:
-        return str(e)
+        return (str(e), 1)
 
 
 def decimal_encode(obj: Any) -> float:

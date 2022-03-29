@@ -3,12 +3,12 @@ from tqdm import tqdm
 import csv
 import json
 from decimal import Decimal
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
 count = 0
 
 
-def csv_import(table: Any, file: str) -> str:
+def csv_import(table: Any, file: str) -> Tuple:
     """csv import into DynamoDB table
 
     Args:
@@ -16,7 +16,7 @@ def csv_import(table: Any, file: str) -> str:
         file (str): csv file path
 
     Returns:
-        str: result message
+        Tuple: result message and exit code
     """
 
     # read csv spec
@@ -24,7 +24,7 @@ def csv_import(table: Any, file: str) -> str:
         csv_spec = configparser.ConfigParser()
         csv_spec.read(f"{file}.spec")
     except Exception:
-        return "CSV specification file can't read"
+        return ("CSV specification file can't read", 1)
 
     # read csv
     try:
@@ -67,11 +67,11 @@ def csv_import(table: Any, file: str) -> str:
             if(len(batch)) > 0:
                 write_to_dynamo(table, batch)
 
-        return "{name} csv imported {count} items".format(
-            name=table.name, count=count)
+        return ("{name} csv imported {count} items".format(
+            name=table.name, count=count), 0)
 
     except Exception:
-        return "CSV file can't read"
+        return ("CSV file can't read", 1)
 
 
 def write_to_dynamo(table: Any, rows: Dict) -> None:
