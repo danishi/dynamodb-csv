@@ -7,15 +7,21 @@ on:
     paths-ignore:
       - "**.md"
 
+env:
+  AWS_ACCESS_KEY_ID: foo
+  AWS_SECRET_ACCESS_KEY: bar
+
 jobs:
-  ci:
+  unit_tests:
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: [3.6, 3.7]
+        os: [ubuntu-latest]
+        # python-version: [3.6, 3.7, 3.8, 3.9]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - name: Checkout 🔔
@@ -33,5 +39,46 @@ jobs:
       - name: Run linter 👀
         run: flake8
 
-      - name: Run test 🧪
+      - name: Run unit tests 🧪
         run: pytest
+
+  run_commands:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7]
+        os: [ubuntu-latest]
+        # python-version: [3.6, 3.7, 3.8, 3.9]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }} 🔧
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dynamodb-csv 💉
+        run: |
+          python setup.py install
+          dynamodb-csv -v
+
+      - name: Setup DynamoDB Local 🔧
+        uses: rrainn/dynamodb-action@v2.0.0
+        with:
+          port: 8000
+          cors: '*'
+
+      - name: Create table 🔨
+        run: |
+          aws dynamodb create-table --cli-input-json file://my_table.json --region ap-northeast-1 --endpoint-url http://localhost:8000
+
+      - name: Run commands 🚀
+        run: |
+          dynamodb-csv -i -t my_table -f sample.csv
+          dynamodb-csv -e -t my_table -o sample_exp.csv
+          dynamodb-csv --truncate -t my_table

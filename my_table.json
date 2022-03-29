@@ -1,0 +1,27 @@
+{
+  "TableName": "my_table",
+  "KeySchema": [
+    {
+        "AttributeName": "StringPK",
+        "KeyType": "HASH"
+    },
+    {
+        "AttributeName": "NumberSK",
+        "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+        "AttributeName": "NumberSK",
+        "AttributeType": "N"
+    },
+    {
+        "AttributeName": "StringPK",
+        "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+      "WriteCapacityUnits": 5,
+      "ReadCapacityUnits": 5
+  }
+}
