@@ -122,6 +122,7 @@ DecimalListValues=DL
 You need to have created a DynamoDB table that meets your specifications.
 
 ```shell
+$ aws dynamodb create-table --cli-input-json file://my_table.json --region ap-northeast-1
 $ aws dynamodb describe-table --table-name my_table
 {
     "Table": {
