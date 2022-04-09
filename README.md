@@ -56,7 +56,7 @@ $ dynamodb-csv -h
 
 or
 
-``shell
+```shell
 $ python -m venv venv
 $ . venv/bin/activate
 $ pip install -r requirements-dev.txt
@@ -66,7 +66,7 @@ $ python app/main.py -h
 
 For Windows
 
-``shell
+```shell
 > python -m venv venv
 > venv\Scripts\activate
 > pip install -r requirements-dev.txt
