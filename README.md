@@ -56,11 +56,22 @@ $ dynamodb-csv -h
 
 or
 
-```shell
+``shell
 $ python -m venv venv
 $ . venv/bin/activate
 $ pip install -r requirements-dev.txt
+$ export PYTHONPATH=`pwd`
 $ python app/main.py -h
+```
+
+For Windows
+
+``shell
+> python -m venv venv
+> venv\Scripts\activate
+> pip install -r requirements-dev.txt
+> set PYTHONPATH=%cd%
+> python app/main.py -h
 ```
 
 Or you can use devcontainer.
