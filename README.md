@@ -232,6 +232,31 @@ my_table csv exported 300 items
 $ dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_gsi_exp.csv
 ```
 
+#### Use Query
+```shell
+$ dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_query_exp.csv
+```
+
+```ini
+# sample_query_exp.csv data format specification
+
+# Integer : I
+# String : S
+# Decimal : D
+# Json : J
+
+[QUERY_OPTION]
+PKAttribute=NumberSK
+PKAttributeValue=1
+PKAttributeType=I
+
+[CSV_SPEC]
+NumberSK=I
+StringPK=S
+DecimalValue=D
+JsonValue=J
+```
+
 ### Table truncate
 
 Also, since you may want to erase unnecessary data during the import experiment, we have prepared a command to discard it.

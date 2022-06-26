@@ -8,7 +8,7 @@ from typing import Any
 size = 1000
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def table() -> Any:
     """Create DynamoDB table mock
 

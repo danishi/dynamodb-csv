@@ -79,4 +79,5 @@ jobs:
           dynamodb-csv -i -t my_table -f sample.csv
           dynamodb-csv -e -t my_table -o sample_exp.csv
           dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_gsi_exp.csv
+          dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_query_exp.csv
           dynamodb-csv --truncate -t my_table
