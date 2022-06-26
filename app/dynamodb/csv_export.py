@@ -1,4 +1,5 @@
 import configparser
+from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
 from tqdm import tqdm
 import csv
@@ -31,19 +32,35 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
             print("please wait {name} exporting {file}".format(
                 name=table.name, file=file))
 
-            # scan table
             export_items = []
             try:
-                while True:
-                    response = table.scan(**parameters)
-                    export_items.extend(response["Items"])
-                    if ("LastEvaluatedKey" in response):
-                        parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
-                    else:
-                        break
-
-            except ClientError:
-                return ("aws client error", 1)
+                if "QUERY_OPTION" in csv_spec:
+                    if "PKAttribute" in csv_spec["QUERY_OPTION"]:
+                        key = csv_spec.get("QUERY_OPTION", "PKAttribute")
+                        value = csv_spec.get("QUERY_OPTION", "PKAttributeValue")
+                        type = csv_spec.get("QUERY_OPTION", "PKAttributeType")
+                        if type == "I":
+                            value = int(value)
+                        parameters["KeyConditionExpression"] = Key(key).eq(value)
+                    # query table
+                    while True:
+                        response = table.query(**parameters)
+                        export_items.extend(response["Items"])
+                        if ("LastEvaluatedKey" in response):
+                            parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
+                        else:
+                            break
+                else:
+                    # scan table
+                    while True:
+                        response = table.scan(**parameters)
+                        export_items.extend(response["Items"])
+                        if ("LastEvaluatedKey" in response):
+                            parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
+                        else:
+                            break
+            except ClientError as e:
+                return (f"aws client error:{e}", 1)
             except Exception:
                 return ("table not found", 1)
 
