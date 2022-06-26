@@ -53,7 +53,10 @@ def execute() -> Tuple:
     # csv export
     if args.exp:
         if args.output is not None:
-            result = csv_export(table, args.output)
+            parameters = {}
+            if args.index is not None:
+                parameters["IndexName"] = args.index
+            result = csv_export(table, args.output, parameters)
         else:
             return ("Export mode requires a output file option.", 1)
 
@@ -86,6 +89,8 @@ def parse_args(args: str) -> Any:
         "--truncate", help="mode truncate", action="store_true")
     parser.add_argument(
         "-t", "--table", help="DynamoDB table name", required=True)
+    parser.add_argument(
+        "-idx", "--index", help="DynamoDB index name")
     parser.add_argument(
         "-f", "--file", help="UTF-8 CSV file path required import mode")
     parser.add_argument(

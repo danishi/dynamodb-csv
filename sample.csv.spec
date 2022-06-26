@@ -3,7 +3,7 @@
 # String : S
 # Integer : I
 # Decimal : D
-# Boolean : B
+# Boolean : B (blank false)
 # Json : J
 # StringList : SL
 # DecimalList : DL
