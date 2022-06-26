@@ -1,9 +1,9 @@
-# sample.csv data format specification
+# sample_exp.csv data format specification
 
 # String : S
 # Integer : I
 # Decimal : D
-# Boolean : B
+# Boolean : B (blank false)
 # Json : J
 # StringList : SL
 # DecimalList : DL

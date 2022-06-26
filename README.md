@@ -40,6 +40,8 @@ optional arguments:
   --truncate            mode truncate
   -t TABLE, --table TABLE
                         DynamoDB table name
+  -idx INDEX, --index INDEX
+                        DynamoDB index name
   -f FILE, --file FILE  UTF-8 CSV file path required import mode
   -o OUTPUT, --output OUTPUT
                         output file path required export mode
@@ -112,7 +114,7 @@ foo,3,1,,,"[{""boolean"" : false}]",,
 # String : S
 # Integer : I
 # Decimal : D
-# Boolean : B
+# Boolean : B (blank false)
 # Json : J
 # StringList : SL
 # DecimalList : DL
@@ -159,17 +161,43 @@ $ aws dynamodb describe-table --table-name my_table
             }
         ],
         "TableStatus": "ACTIVE",
-        "CreationDateTime": "2022-02-23T15:31:55.141000+09:00",
+        "CreationDateTime": "2022-06-26T21:19:21.767000+09:00",
         "ProvisionedThroughput": {
-            "LastIncreaseDateTime": "2022-02-23T16:37:29.382000+09:00",
             "NumberOfDecreasesToday": 0,
             "ReadCapacityUnits": 5,
             "WriteCapacityUnits": 5
         },
         "TableSizeBytes": 0,
         "ItemCount": 0,
-        "TableArn": "arn:aws:dynamodb:ap-northeast-1:XXXXXXXXXX:table/my_table",
-        "TableId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        "TableArn": "arn:aws:dynamodb:ap-northeast-1:XXXXXXXXXXX:table/my_table",
+        "TableId": "XXXXXXXX-925b-4cb1-8e3a-604158118c3f",
+        "GlobalSecondaryIndexes": [
+            {
+                "IndexName": "NumberSK-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "NumberSK",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+                    "ProjectionType": "INCLUDE",
+                    "NonKeyAttributes": [
+                        "DecimalValue",
+                        "JsonValue"
+                    ]
+                },
+                "IndexStatus": "ACTIVE",
+                "ProvisionedThroughput": {
+                    "NumberOfDecreasesToday": 0,
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                },
+                "IndexSizeBytes": 0,
+                "ItemCount": 0,
+                "IndexArn": "arn:aws:dynamodb:ap-northeast-1:XXXXXXXXXXX:table/my_table/index/NumberSK-index"
+            }
+        ]
     }
 }
 ```
@@ -197,6 +225,11 @@ $ dynamodb-csv -e -t my_table -o sample_exp.csv
 please wait my_table exporting sample_exp.csv
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:00<00:00, 16666.77it/s]
 my_table csv exported 300 items
+```
+
+#### Use index
+```shell
+$ dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_gsi_exp.csv
 ```
 
 ### Table truncate

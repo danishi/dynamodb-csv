@@ -4,10 +4,10 @@ from tqdm import tqdm
 import csv
 import json
 from decimal import Decimal
-from typing import Any, Tuple
+from typing import Any, Tuple, Dict
 
 
-def csv_export(table: Any, file: str) -> Tuple:
+def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
     """Export DynamoDB table to csv
 
     Args:
@@ -33,7 +33,6 @@ def csv_export(table: Any, file: str) -> Tuple:
 
             # scan table
             export_items = []
-            parameters = {}
             try:
                 while True:
                     response = table.scan(**parameters)
