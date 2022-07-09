@@ -28,7 +28,7 @@ $ python -m venv venv
 $ . venv/bin/activate
 $ pip install dynamodb-csv
 $ dynamodb-csv -h
-usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-f FILE] [-o OUTPUT]
+usage: main.py [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT]
 
 Import CSV file into DynamoDB table utilities
 
