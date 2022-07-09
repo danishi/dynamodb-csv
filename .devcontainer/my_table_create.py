@@ -29,7 +29,27 @@ def create_table():
                 "AttributeName": "NumberSK",
                 "AttributeType": "N"
             },
-
+        ],
+        GlobalSecondaryIndexes=[
+            {
+                "IndexName": "NumberSK-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "NumberSK",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+                    "ProjectionType": "INCLUDE",
+                    "NonKeyAttributes": [
+                        "DecimalValue", "JsonValue"
+                    ]
+                },
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                }
+            }
         ],
         ProvisionedThroughput={
             "ReadCapacityUnits": 5,

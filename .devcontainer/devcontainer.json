@@ -51,7 +51,8 @@
     "shd101wyy.markdown-preview-enhanced",
     "christian-kohler.path-intellisense",
     "redhat.vscode-yaml",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "devAdvice.serverlessconsole"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -69,7 +70,7 @@
   // "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
 
   // Use 'postStartCommand' to run commands after the container is started.
-  "postStartCommand": "./.devcontainer/postCreateCommand.sh",
+  "postStartCommand": "./.devcontainer/postStartCommand.sh",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode"
