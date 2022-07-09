@@ -35,21 +35,54 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
             export_items = []
             try:
                 if "QUERY_OPTION" in csv_spec:
-                    if "PKAttribute" in csv_spec["QUERY_OPTION"]:
-                        key = csv_spec.get("QUERY_OPTION", "PKAttribute")
-                        value = csv_spec.get("QUERY_OPTION", "PKAttributeValue")
-                        type = csv_spec.get("QUERY_OPTION", "PKAttributeType")
-                        if type == "I":
-                            value = int(value)
-                        parameters["KeyConditionExpression"] = Key(key).eq(value)
-                    # query table
-                    while True:
-                        response = table.query(**parameters)
-                        export_items.extend(response["Items"])
-                        if ("LastEvaluatedKey" in response):
-                            parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
-                        else:
-                            break
+                    try:
+                        # Partition key option
+                        if "PKAttribute" in csv_spec["QUERY_OPTION"]:
+                            pk_key = csv_spec.get("QUERY_OPTION", "PKAttribute")
+                            pk_value = csv_spec.get("QUERY_OPTION", "PKAttributeValue")
+                            pk_type = csv_spec.get("QUERY_OPTION", "PKAttributeType")
+                            if pk_type == "I":
+                                pk_value = int(pk_value)
+                            parameters["KeyConditionExpression"] = Key(pk_key).eq(pk_value)
+
+                        # Sort key option
+                        if "SKAttribute" in csv_spec["QUERY_OPTION"]:
+                            sk_key = csv_spec.get("QUERY_OPTION", "SKAttribute")
+                            sk_values = csv_spec.get("QUERY_OPTION", "SKAttributeValues").split(",")
+                            sk_type = csv_spec.get("QUERY_OPTION", "SKAttributeType")
+
+                            if sk_type == "I":
+                                sk_values = [int(v) for v in sk_values]
+
+                            sk_values = sk_values[0] if len(sk_values) == 1 else sk_values
+
+                            sk_expression = csv_spec.get("QUERY_OPTION", "SKAttributeExpression")
+                            if sk_expression == "begins_with":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).begins_with(sk_values)
+                            elif sk_expression == "between":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).between(sk_values[0], sk_values[1])
+                            elif sk_expression == "eq":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).eq(sk_values)
+                            elif sk_expression == "gt":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).gt(sk_values)
+                            elif sk_expression == "gte":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).gte(sk_values)
+                            elif sk_expression == "lt":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).lt(sk_values)
+                            elif sk_expression == "lte":
+                                parameters["KeyConditionExpression"] &= Key(sk_key).lte(sk_values)
+
+                        # query table
+                        while True:
+                            response = table.query(**parameters)
+                            export_items.extend(response["Items"])
+                            if ("LastEvaluatedKey" in response):
+                                parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
+                            else:
+                                break
+                    except Exception as e:
+                        return ("query option error:" + str(e), 1)
+
                 else:
                     # scan table
                     while True:
