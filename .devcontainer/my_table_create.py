@@ -35,14 +35,14 @@ def create_table():
                 "IndexName": "NumberSK-index",
                 "KeySchema": [
                     {
-                    "AttributeName": "NumberSK",
-                    "KeyType": "HASH"
+                        "AttributeName": "NumberSK",
+                        "KeyType": "HASH"
                     }
                 ],
                 "Projection": {
                     "ProjectionType": "INCLUDE",
                     "NonKeyAttributes": [
-                    "DecimalValue", "JsonValue"
+                        "DecimalValue", "JsonValue"
                     ]
                 },
                 "ProvisionedThroughput": {
