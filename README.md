@@ -257,6 +257,32 @@ DecimalValue=D
 JsonValue=J
 ```
 
+##### Query options
+* `PKAttribute` : Partition key attribute name
+* `PKAttributeValue` : Partition key attribute query value
+* `PKAttributeType` : Partition key attribute data type
+* `SKAttribute` : Sort key attribute name
+* `SKAttributeValues` : Partition key attribute query value or values
+  * `foo` or `foo,bar`
+* `SKAttributeType` : Sort key attribute data type
+* `SKAttributeExpression` : Sort key attribute query expression [ex.](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions)
+  * `begins_with` `between` `eq` `gt` `gte` `lt` `lte`
+
+```shell
+$ dynamodb-csv -e -t my_table -o sample_query_exp2.csv
+```
+
+```ini
+[QUERY_OPTION]
+PKAttribute=StringPK
+PKAttributeValue=bar
+PKAttributeType=S
+SKAttribute=NumberSK
+SKAttributeValues=50,100
+SKAttributeType=I
+SKAttributeExpression=between
+```
+
 ### Table truncate
 
 Also, since you may want to erase unnecessary data during the import experiment, we have prepared a command to discard it.

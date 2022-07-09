@@ -132,3 +132,4 @@ config.ini
 sample_exp.csv
 sample_gsi_exp.csv
 sample_query_exp.csv
+sample_query_exp2.csv
