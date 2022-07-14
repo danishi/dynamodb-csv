@@ -306,3 +306,7 @@ See [LICENSE](LICENSE)
 <a href="https://github.com/danishi/dynamodb-csv/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=danishi/dynamodb-csv" />
 </a>
+
+## Appendix
+
+[User guide (for japanese)](https://danishi.github.io/dynamodb-csv/)
