@@ -263,7 +263,7 @@ JsonValue=J
 * `PKAttributeType` : Partition key attribute data type
 * `SKAttribute` : Sort key attribute name
 * `SKAttributeValues` : Sort key attribute query value or values
-  * `foo` or `foo,bar`
+  * ex. `foo` or `foo,bar`
 * `SKAttributeType` : Sort key attribute data type
 * `SKAttributeExpression` : Sort key attribute query expression [ex.](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions)
   * `begins_with` `between` `eq` `gt` `gte` `lt` `lte`
