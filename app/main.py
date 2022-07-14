@@ -7,7 +7,7 @@ from typing import Any, Tuple
 
 from app.dynamodb import csv_import, csv_export, truncate
 
-__version__ = "1.4.1"
+__version__ = "1.4.2"
 config_file = "config.ini"
 
 
@@ -112,6 +112,7 @@ def config_read_and_get_table(args: Any) -> Any:
         raise ValueError(f"Please make your {config_file} file")
 
     config = configparser.ConfigParser()
+    config.optionxform = str
     config.read_dict({"AWS": {"ENDPOINT_URL": ""}})
     config.read(config_file)
 
