@@ -137,3 +137,10 @@ SKAttributeValues=50,100
 SKAttributeType=I
 SKAttributeExpression=between
 ```
+
+## テーブルのクリア
+テーブルの項目を全て削除することもできます。
+
+```shell
+$ dynamodb-csv --truncate -t my_table
+```
