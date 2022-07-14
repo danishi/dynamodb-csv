@@ -22,6 +22,7 @@ def csv_import(table: Any, file: str) -> Tuple:
     # read csv spec
     try:
         csv_spec = configparser.ConfigParser()
+        csv_spec.optionxform = str
         csv_spec.read(f"{file}.spec")
     except Exception:
         return ("CSV specification file can't read", 1)

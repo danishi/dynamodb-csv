@@ -112,6 +112,7 @@ def config_read_and_get_table(args: Any) -> Any:
         raise ValueError(f"Please make your {config_file} file")
 
     config = configparser.ConfigParser()
+    config.optionxform = str
     config.read_dict({"AWS": {"ENDPOINT_URL": ""}})
     config.read(config_file)
 

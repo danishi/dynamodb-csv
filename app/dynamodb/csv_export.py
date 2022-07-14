@@ -22,6 +22,7 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
     # read csv spec
     try:
         csv_spec = configparser.ConfigParser()
+        csv_spec.optionxform = str
         csv_spec.read(f"{file}.spec")
     except Exception:
         return ("CSV specification file can't read", 1)
@@ -102,7 +103,7 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
 
                 if not is_write_csv_header_labels:
                     # write csv header labels
-                    csv_header_labels = item.keys()
+                    csv_header_labels = list(csv_spec["CSV_SPEC"])
                     writer = csv.DictWriter(f, fieldnames=csv_header_labels, lineterminator="\n")
                     writer.writeheader()
                     is_write_csv_header_labels = True
