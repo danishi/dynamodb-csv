@@ -14,6 +14,9 @@
     "shd101wyy.markdown-preview-enhanced",
     "christian-kohler.path-intellisense",
     "redhat.vscode-yaml",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "mechatroner.rainbow-csv",
+    "phplasma.csv-to-table",
+    "devAdvice.serverlessconsole"
   ]
 }
