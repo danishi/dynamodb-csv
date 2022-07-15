@@ -24,8 +24,8 @@ def csv_import(table: Any, file: str) -> Tuple:
         csv_spec = configparser.ConfigParser()
         csv_spec.optionxform = str
         csv_spec.read(f"{file}.spec")
-    except Exception:
-        return ("CSV specification file can't read", 1)
+    except Exception as e:
+        return (f"CSV specification file can't read:{e}", 1)
 
     # read csv
     try:
@@ -71,8 +71,8 @@ def csv_import(table: Any, file: str) -> Tuple:
         return ("{name} csv imported {count} items".format(
             name=table.name, count=count), 0)
 
-    except Exception:
-        return ("CSV file can't read", 1)
+    except Exception as e:
+        return (f"CSV file can't read:{e}", 1)
 
 
 def write_to_dynamo(table: Any, rows: Dict) -> None:
@@ -94,5 +94,5 @@ def write_to_dynamo(table: Any, rows: Dict) -> None:
                 )
                 count = count + 1
 
-    except Exception:
-        print("Error executing batch_writer")
+    except Exception as e:
+        print(f"Error executing batch_writer:{e}")

@@ -25,10 +25,10 @@ def truncate(table: Any) -> Tuple:
                 parameters["ExclusiveStartKey"] = response["LastEvaluatedKey"]
             else:
                 break
-    except ClientError:
-        return ("aws client error", 1)
-    except Exception:
-        return ("table not found", 1)
+    except ClientError as e:
+        return (f"aws client error:{e}", 1)
+    except Exception as e:
+        return (f"table not found:{e}", 1)
 
     print("{name} scan {count} items".format(
         name=table.name, count=len(delete_items)))
