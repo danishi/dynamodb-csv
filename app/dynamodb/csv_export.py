@@ -24,8 +24,8 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
         csv_spec = configparser.ConfigParser()
         csv_spec.optionxform = str
         csv_spec.read(f"{file}.spec")
-    except Exception:
-        return ("CSV specification file can't read", 1)
+    except Exception as e:
+        return (f"CSV specification file can't read:{e}", 1)
 
     # write csv
     try:
@@ -82,7 +82,7 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
                             else:
                                 break
                     except Exception as e:
-                        return ("query option error:" + str(e), 1)
+                        return (f"query option error:{e}", 1)
 
                 else:
                     # scan table
@@ -95,8 +95,8 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
                             break
             except ClientError as e:
                 return (f"aws client error:{e}", 1)
-            except Exception:
-                return ("table not found", 1)
+            except Exception as e:
+                return (f"table not found:{e}", 1)
 
             is_write_csv_header_labels = False
             for item in tqdm(export_items):
@@ -134,8 +134,8 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
         return ("{name} csv exported {count} items".format(
             name=table.name, count=len(export_items)), 0)
 
-    except IOError:
-        print("I/O error")
+    except IOError as e:
+        print(f"I/O error:{e}")
 
     except Exception as e:
         return (str(e), 1)
