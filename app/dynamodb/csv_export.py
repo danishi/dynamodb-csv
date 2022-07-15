@@ -109,8 +109,14 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
                     is_write_csv_header_labels = True
 
                 # updated dict to match specifications
-                for key in item.keys():
-                    spec = csv_spec.get("CSV_SPEC", key)
+                for key in list(item.keys()):
+                    try:
+                        spec = csv_spec.get("CSV_SPEC", key)
+                    except Exception:
+                        # Removed attributes that do not match the specifications
+                        del item[key]
+                        continue
+
                     if spec == "S":  # String
                         item[key] = str(item[key])
                     elif spec == "I":  # Integer
