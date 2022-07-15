@@ -8,9 +8,13 @@
 [![Downloads week](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
 [![Downloads month](https://pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/danishi)
+
 ![DynamoDBCSV](https://user-images.githubusercontent.com/56535085/159007555-e72d1c26-eb44-46ca-bc38-c752164995bf.png)
 
 A utility that allows CSV import / export to DynamoDB on the command line
+
+Give a ⭐️ if you like this tool!
 
 ## Introduction
 
@@ -19,7 +23,7 @@ Written in a simple Python script, it's easy to parse and modify.
 
 it works for me.
 
-## Getting started
+## Getting started 🚀
 
 ### Install
 
@@ -301,7 +305,7 @@ See [LICENSE](LICENSE)
 
 ## Special Thanks
 
-### Code contributors
+### Code contributors 🤝
 
 <a href="https://github.com/danishi/dynamodb-csv/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=danishi/dynamodb-csv" />
@@ -309,4 +313,5 @@ See [LICENSE](LICENSE)
 
 ## Appendix
 
-[User guide (for japanese)](https://danishi.github.io/dynamodb-csv/)
+### User guide
+- [User guide (for japanese)](https://danishi.github.io/dynamodb-csv/)
