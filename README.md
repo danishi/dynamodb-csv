@@ -21,7 +21,7 @@ Give a ⭐️ if you like this tool!
 I made this command because I didn't have any tools to satisfy my modest desire to make it easy to import CSV files into DynamoDB.
 Written in a simple Python script, it's easy to parse and modify.
 
-it works for me.
+It works for me.
 
 ## Getting started 🚀
 
@@ -60,7 +60,7 @@ $ python setup.py install
 $ dynamodb-csv -h
 ```
 
-or
+Or
 
 ```shell
 $ python -m venv venv
