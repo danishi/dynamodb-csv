@@ -1,5 +1,25 @@
 {
     "version": "0.2.0",
+    "inputs": [
+      {
+          "type": "promptString",
+          "id": "table",
+          "description": "Use table name.",
+          "default": "my_table"
+      },
+      {
+        "type": "promptString",
+        "id": "importFile",
+        "description": "Import file name.",
+        "default": "sample.csv"
+      },
+      {
+        "type": "promptString",
+        "id": "exportFile",
+        "description": "Export file name.",
+        "default": "sample_exp.csv"
+      }
+    ],
     "configurations": [
         {
           "name": "DynamoDB import",
@@ -10,9 +30,9 @@
           "args": [
             "--imp",
             "-t",
-            "my_table",
+            "${input:table}",
             "-f",
-            "sample.csv"
+            "${input:importFile}"
           ],
           "justMyCode": true,
           "env": {
@@ -28,9 +48,9 @@
           "args": [
             "--exp",
             "-t",
-            "my_table",
+            "${input:table}",
             "-o",
-            "sample_exp.csv"
+            "${input:exportFile}"
           ],
           "justMyCode": true,
           "env": {
@@ -46,7 +66,7 @@
             "args": [
               "--truncate",
               "-t",
-              "my_table"
+              "${input:table}",
             ],
             "justMyCode": true,
             "env": {
