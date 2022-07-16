@@ -1,7 +1,8 @@
 -r requirements.txt
-flake8
-autopep8
-pytest
-pytest-mock
-pytest-sugar
-moto
+
+autopep8==1.6.0
+flake8==4.0.1
+moto==3.1.16
+pytest==7.0.1
+pytest-mock==3.6.1
+pytest-sugar==0.9.5
