@@ -15,7 +15,7 @@ Pythonが実行できる環境が必要です。
 ```shell
 $ pip install dynamodb-csv
 $ dynamodb-csv -h
-usage: main.py [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT]
+usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore]
 
 Import CSV file into DynamoDB table utilities
 
@@ -32,6 +32,7 @@ optional arguments:
   -f FILE, --file FILE  UTF-8 CSV file path required import mode
   -o OUTPUT, --output OUTPUT
                         output file path required export mode
+  --ignore              ignore import error
 ```
 
 # 接続設定ファイル
@@ -73,6 +74,14 @@ $ aws dynamodb create-table --cli-input-json file://my_table.json --region ap-no
 ```shell
 $ dynamodb-csv -i -t my_table -f sample.csv
 ```
+
+ignoreオプションを付けると、CSV行をインポートする際にエラーがあった場合も処理中断せず、その行を無視して進めます。  
+
+```shell
+$ dynamodb-csv -i -t my_table -f sample.csv --ignore
+```
+
+ignoreオプションを付けた場合インポート速度が遅くなります。
 
 ## エクスポート
 ```shell
