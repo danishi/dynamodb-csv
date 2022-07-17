@@ -46,7 +46,7 @@ def execute() -> Tuple:
     # csv import
     if args.imp:
         if args.file is not None:
-            result = csv_import(table, args.file)
+            result = csv_import(table, args.file, args.ignore)
         else:
             return ("Import mode requires a input file option.", 1)
 
@@ -95,6 +95,8 @@ def parse_args(args: str) -> Any:
         "-f", "--file", help="UTF-8 CSV file path required import mode")
     parser.add_argument(
         "-o", "--output", help="output file path required export mode")
+    parser.add_argument(
+        "--ignore", help="ignore import error", action="store_true")
 
     return parser.parse_args()
 
