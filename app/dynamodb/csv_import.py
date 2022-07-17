@@ -6,9 +6,10 @@ from decimal import Decimal
 from typing import Any, Dict, Tuple
 
 count = 0
+error_count = 0
 
 
-def csv_import(table: Any, file: str) -> Tuple:
+def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
     """csv import into DynamoDB table
 
     Args:
@@ -44,38 +45,46 @@ def csv_import(table: Any, file: str) -> Tuple:
                 #     batch.clear()
 
                 # updated dict to match specifications
-                for key in row.keys():
+                for key in list(row.keys()):
                     spec = csv_spec.get("CSV_SPEC", key)
-                    if spec == "S":  # String
-                        row[key] = str(row[key])
-                    elif spec == "I":  # Integer
-                        row[key] = int(row[key])
-                    elif spec == "D":  # Decimal
-                        row[key] = Decimal(row[key])
-                    elif spec == "B":  # Boolean
-                        row[key] = bool(row[key])
-                    elif spec == "J":  # Json
-                        row[key] = json.loads(row[key], parse_float=Decimal)
-                    elif spec == "SL":  # StringList
-                        row[key] = row[key].split()
-                    elif spec == "DL":  # DecimalList
-                        row[key] = list(map(Decimal, row[key].split()))
-                    else:
-                        pass
+                    try:
+                        if spec == "S":  # String
+                            row[key] = str(row[key])
+                        elif spec == "I":  # Integer
+                            row[key] = int(row[key])
+                        elif spec == "D":  # Decimal
+                            row[key] = Decimal(row[key])
+                        elif spec == "B":  # Boolean
+                            row[key] = bool(row[key])
+                        elif spec == "J":  # Json
+                            row[key] = json.loads(row[key], parse_float=Decimal)
+                        elif spec == "SL":  # StringList
+                            row[key] = row[key].split()
+                        elif spec == "DL":  # DecimalList
+                            row[key] = list(map(Decimal, row[key].split()))
+                        else:
+                            pass
+                    except Exception:
+                        del row[key]
 
                 batch.append(row)
 
             if(len(batch)) > 0:
-                write_to_dynamo(table, batch)
+                write_to_dynamo(table, batch, ignore)
 
-        return ("{name} csv imported {count} items".format(
-            name=table.name, count=count), 0)
+        if ignore:
+            message = "{name} csv imported {count} items and {error_count} error items".format(
+                name=table.name, count=count, error_count=error_count)
+        else:
+            message = "{name} csv imported {count} items".format(
+                name=table.name, count=count)
+        return (message, 0)
 
     except Exception as e:
         return (f"CSV file can't read:{e}", 1)
 
 
-def write_to_dynamo(table: Any, rows: Dict) -> None:
+def write_to_dynamo(table: Any, rows: Dict, ignore: bool = False) -> None:
     """csv rows into DynamoDB
 
     Args:
@@ -83,16 +92,30 @@ def write_to_dynamo(table: Any, rows: Dict) -> None:
         rows (Dict): csv rows
     """
     global count
+    global error_count
 
-    try:
-        # overwrite duplicate key item
-        key_names = [x["AttributeName"] for x in table.key_schema]
-        with table.batch_writer(overwrite_by_pkeys=key_names) as batch:
-            for i in tqdm(range(len(rows))):
-                batch.put_item(
+    # Ignore error item
+    if ignore:
+        for i in tqdm(range(len(rows))):
+            try:
+                table.put_item(
                     Item=rows[i]
                 )
                 count = count + 1
+            except Exception:
+                error_count = error_count + 1
 
-    except Exception as e:
-        print(f"Error executing batch_writer:{e}")
+    # Batch write
+    else:
+        try:
+            # overwrite duplicate key item
+            key_names = [x["AttributeName"] for x in table.key_schema]
+            with table.batch_writer(overwrite_by_pkeys=key_names) as batch:
+                for i in tqdm(range(len(rows))):
+                    batch.put_item(
+                        Item=rows[i]
+                    )
+                    count = count + 1
+
+        except Exception as e:
+            print(f"Error executing batch_writer:{e}")

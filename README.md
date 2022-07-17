@@ -32,7 +32,7 @@ $ python -m venv venv
 $ . venv/bin/activate
 $ pip install dynamodb-csv
 $ dynamodb-csv -h
-usage: main.py [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT]
+usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore]
 
 Import CSV file into DynamoDB table utilities
 
@@ -49,6 +49,7 @@ optional arguments:
   -f FILE, --file FILE  UTF-8 CSV file path required import mode
   -o OUTPUT, --output OUTPUT
                         output file path required export mode
+  --ignore              ignore import error
 ```
 
 ### Install for developer
@@ -217,6 +218,22 @@ please wait my_table importing sample.csv
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.97it/s]
 my_table csv imported 300 items
 ```
+
+It is processed at high speed by batch write.
+
+#### Ignore option
+
+If there is an error such as a key schema mismatch, you can give the option to ignore the CSV record.
+
+```shell
+$ dynamodb-csv -i -t my_table -f sample.csv --ignore
+please wait my_table importing sample.csv
+300it [00:00, 19983.03it/s]
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.97it/s]
+my_table csv imported 299 items and 1 error items
+```
+
+No batch write is done when this option is used.
 
 ### Export table to CSV
 
