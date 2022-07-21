@@ -15,6 +15,7 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
     Args:
         table (Any): boto3 DynamoDB table object
         file (str): csv file path
+        ignore (bool): ignore put item error
 
     Returns:
         Tuple: result message and exit code
@@ -90,6 +91,7 @@ def write_to_dynamo(table: Any, rows: Dict, ignore: bool = False) -> None:
     Args:
         table (Any): boto3 DynamoDB table object
         rows (Dict): csv rows
+        ignore (bool): ignore put item error
     """
     global count
     global error_count
