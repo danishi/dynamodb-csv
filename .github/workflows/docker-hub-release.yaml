@@ -1,4 +1,4 @@
-name: test-docker-hub-release
+name: docker-hub-release
 
 on:
   push:
