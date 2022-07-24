@@ -1,9 +1,11 @@
 name: docker-hub-release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows:
+      - pypi-release
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
