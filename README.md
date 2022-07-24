@@ -10,7 +10,7 @@
 [![Downloads](https://pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
 [![Downloads week](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
 [![Downloads month](https://pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
-[![Docker Pulls](https://img.shields.io/docker/pulls/dgiot/dgiot)](https://hub.docker.com/r/danishi/dynamodb-csv)
+[![Docker Pulls](https://img.shields.io/docker/pulls/danishi/dynamodb-csv)](https://hub.docker.com/r/danishi/dynamodb-csv)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/danishi)
 
@@ -87,16 +87,16 @@ For Windows
 
 Or you can use devcontainer.
 
-### Use Docker image
+### [Use Docker image](https://hub.docker.com/r/danishi/dynamodb-csv)
 
 ```shell
-$ docker run --rm -v ${PWD}/:/local danishi/dynamodb-csv:latest -i -t my_table -f sample.csv
+$ docker run --rm -v ${PWD}/:/local danishi/dynamodb-csv:tagname -i -t my_table -f sample.csv
 ```
 
 For Windows
 
 ```shell
-> docker run --rm -v %cd%/:/local danishi/dynamodb-csv:latest -i -t my_table -f sample.csv
+> docker run --rm -v %cd%/:/local danishi/dynamodb-csv:tagname -i -t my_table -f sample.csv
 ```
 
 ### Create your config.ini file on current directory
