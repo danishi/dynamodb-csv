@@ -257,8 +257,8 @@ There are options to convert this to Null or not to set the attribute itself.
 
 ```ini
 [IMPORT_OPTION]
-ConvertBlankToNullAttrs=DecimalValue,StringListValues
-ConvertBlankToDropAttrs=NullValue
+ConvertBlankToNullAttrs=NullValue,JsonValue
+ConvertBlankToDropAttrs=DecimalValue
 ```
 
 ### Export table to CSV
