@@ -35,6 +35,16 @@ optional arguments:
   --ignore              ignore import error
 ```
 
+または、Dockerを使うこともできます。
+
+```shell
+# Linux
+$ docker run --rm -v ${PWD}/:/local danishi/dynamodb-csv:latest -h
+
+# Windows
+> docker run --rm -v %cd%/:/local danishi/dynamodb-csv:latest -h
+```
+
 # 接続設定ファイル
 `config.ini.example`をコピーして`config.ini`を作成し、接続先情報を記述します。
 
@@ -82,6 +92,16 @@ $ dynamodb-csv -i -t my_table -f sample.csv --ignore
 ```
 
 ignoreオプションを付けた場合インポート速度が遅くなります。
+
+### 空文字の扱い
+デフォルトではCSVに空の値があると空でセットします。  
+これをNullに変換したり、属性自体をセットさせないためのオプションがあります。
+
+```ini
+[IMPORT_OPTION]
+ConvertBlankToNullAttrs=NullValue,JsonValue
+ConvertBlankToDropAttrs=DecimalValue
+```
 
 ## エクスポート
 ```shell
