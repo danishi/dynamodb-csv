@@ -48,6 +48,21 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
                 # updated dict to match specifications
                 for key in list(row.keys()):
                     spec = csv_spec.get("CSV_SPEC", key)
+
+                    # Convert blank value
+                    if "IMPORT_OPTION" in csv_spec:
+                        if "ConvertBlankToNullAttrs" in csv_spec["IMPORT_OPTION"] and not row[key]:
+                            to_null_attrs = csv_spec.get("IMPORT_OPTION", "ConvertBlankToNullAttrs").split(",")
+                            if key in to_null_attrs:
+                                row[key] = None
+                                continue
+
+                        if "ConvertBlankToDropAttrs" in csv_spec["IMPORT_OPTION"] and not row[key]:
+                            to_drop_attrs = csv_spec.get("IMPORT_OPTION", "ConvertBlankToDropAttrs").split(",")
+                            if key in to_drop_attrs:
+                                del row[key]
+                                continue
+
                     try:
                         if spec == "S":  # String
                             row[key] = str(row[key])
@@ -65,6 +80,7 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
                             row[key] = list(map(Decimal, row[key].split()))
                         else:
                             pass
+
                     except Exception:
                         del row[key]
 

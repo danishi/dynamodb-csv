@@ -17,3 +17,7 @@ NullValue=S
 JsonValue=J
 StringListValues=SL
 DecimalListValues=DL
+
+[IMPORT_OPTION]
+ConvertBlankToNullAttrs=NullValue,StringListValues
+ConvertBlankToDropAttrs=DecimalValue

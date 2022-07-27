@@ -251,6 +251,16 @@ my_table csv imported 299 items and 1 error items
 
 No batch write is done when this option is used.
 
+#### Import options
+By default, if CSV has an empty value, it will be set to empty.  
+There are options to convert this to Null or not to set the attribute itself.
+
+```ini
+[IMPORT_OPTION]
+ConvertBlankToNullAttrs=DecimalValue,StringListValues
+ConvertBlankToDropAttrs=NullValue
+```
+
 ### Export table to CSV
 
 You will also need to expand the same data to multiple tables.  
