@@ -7,7 +7,7 @@ from typing import Any, Tuple
 
 from app.dynamodb import csv_import, csv_export, truncate
 
-__version__ = "1.4.5"
+__version__ = "1.4.6"
 config_file = "config.ini"
 
 
