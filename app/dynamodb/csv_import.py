@@ -64,23 +64,7 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
                                 continue
 
                     try:
-                        if spec == "S":  # String
-                            row[key] = str(row[key])
-                        elif spec == "I":  # Integer
-                            row[key] = int(row[key])
-                        elif spec == "D":  # Decimal
-                            row[key] = Decimal(row[key])
-                        elif spec == "B":  # Boolean
-                            row[key] = bool(row[key])
-                        elif spec == "J":  # Json
-                            row[key] = json.loads(row[key], parse_float=Decimal)
-                        elif spec == "SL":  # StringList
-                            row[key] = row[key].split()
-                        elif spec == "DL":  # DecimalList
-                            row[key] = list(map(Decimal, row[key].split()))
-                        else:
-                            pass
-
+                        row[key] = convert_column(spec, row, key)
                     except Exception:
                         del row[key]
 
@@ -99,6 +83,35 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
 
     except Exception as e:
         return (f"CSV file can't read:{e}", 1)
+
+
+def convert_column(spec: str, row: Dict, key: str) -> Any:
+    """convert column
+
+    Args:
+        spec (str): type of column
+        row (Dict): row data
+        key (str): key
+
+    Returns:
+        Any: converted column value
+    """
+    if spec == "S":  # String
+        return str(row[key])
+    elif spec == "I":  # Integer
+        return int(row[key])
+    elif spec == "D":  # Decimal
+        return Decimal(row[key])
+    elif spec == "B":  # Boolean
+        return bool(row[key])
+    elif spec == "J":  # Json
+        return json.loads(row[key], parse_float=Decimal)
+    elif spec == "SL":  # StringList
+        return row[key].split()
+    elif spec == "DL":  # DecimalList
+        return list(map(Decimal, row[key].split()))
+    else:
+        return row[key]
 
 
 def write_to_dynamo(table: Any, rows: Dict, ignore: bool = False) -> None:

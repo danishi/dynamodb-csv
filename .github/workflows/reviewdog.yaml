@@ -35,4 +35,6 @@ jobs:
         uses: Uno-Takashi/Lizard-Runner@v3
         with:
           path: "./app ./tests"
+          CCN: "20"
           arguments: "10"
+          ignore_warnings: "2"
