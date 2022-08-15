@@ -117,23 +117,7 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
                         del item[key]
                         continue
 
-                    if spec == "S":  # String
-                        item[key] = str(item[key])
-                    elif spec == "I":  # Integer
-                        item[key] = int(item[key])
-                    elif spec == "D":  # Decimal
-                        item[key] = float(item[key])
-                    elif spec == "B":  # Boolean
-                        if not item[key]:
-                            item[key] = ""
-                    elif spec == "J":  # Json
-                        item[key] = json.dumps(item[key], default=decimal_encode)
-                    elif spec == "SL":  # StringList
-                        item[key] = " ".join(item[key])
-                    elif spec == "DL":  # DecimalList
-                        item[key] = " ".join(list(map(str, item[key])))
-                    else:
-                        pass
+                    item[key] = convert_item(spec, item, key)
 
                 writer.writerow(item)
 
@@ -147,7 +131,48 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
         return (str(e), 1)
 
 
+def convert_item(spec: str, item: Dict, key: str) -> Any:
+    """convert item
+
+    Args:
+        spec (str): type of item
+        row (Dict): row data
+        key (str): key
+
+    Returns:
+        Any: converted item value
+    """
+    if spec == "S":  # String
+        return str(item[key])
+    elif spec == "I":  # Integer
+        return int(item[key])
+    elif spec == "D":  # Decimal
+        return float(item[key])
+    elif spec == "B":  # Boolean
+        if not item[key]:
+            return ""
+    elif spec == "J":  # Json
+        return json.dumps(item[key], default=decimal_encode)
+    elif spec == "SL":  # StringList
+        return " ".join(item[key])
+    elif spec == "DL":  # DecimalList
+        return " ".join(list(map(str, item[key])))
+    else:
+        return item[key]
+
+
 def decimal_encode(obj: Any) -> float:
+    """encode decimal
+
+    Args:
+        obj (Any): object
+
+    Raises:
+        TypeError: Not decimal object
+
+    Returns:
+        float: decimal object
+    """
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError
