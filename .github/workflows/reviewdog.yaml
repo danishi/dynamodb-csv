@@ -30,3 +30,9 @@ jobs:
           # Change reporter level if you need.
           # GitHub Status Check won't become failure with warning.
           level: warning
+
+      - name: Run Lizard 🌀
+        uses: Uno-Takashi/Lizard-Runner@v3
+        with:
+          path: "./app ./tests"
+          arguments: "10"
