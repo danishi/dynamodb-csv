@@ -80,7 +80,9 @@ def table() -> Any:
                 "JsonValue": json.loads(
                     '[{"string" : "value"},{"number" : 100}]', parse_float=Decimal),
                 "StringListValues": ["foo", "bar", "baz"],
+                "StringSetValues": set(["foo", "bar", "baz"]),
                 "DecimalListValues": [10, Decimal(str(10.5)), 20],
+                "DecimalSetValues": set([10, Decimal(str(10.5)), 20]),
             })
 
         yield table

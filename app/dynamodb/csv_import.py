@@ -108,8 +108,12 @@ def convert_column(spec: str, row: Dict, key: str) -> Any:
         return json.loads(row[key], parse_float=Decimal)
     elif spec == "SL":  # StringList
         return row[key].split()
+    elif spec == "SS":  # StringSet
+        return set(row[key].split())
     elif spec == "DL":  # DecimalList
         return list(map(Decimal, row[key].split()))
+    elif spec == "DS":  # DecimalSet
+        return set(list(map(Decimal, row[key].split())))
     else:
         return row[key]
 

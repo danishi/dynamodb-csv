@@ -153,9 +153,9 @@ def convert_item(spec: str, item: Dict, key: str) -> Any:
             return ""
     elif spec == "J":  # Json
         return json.dumps(item[key], default=decimal_encode)
-    elif spec == "SL":  # StringList
+    elif spec == "SL" or spec == "SS":  # StringList or StringSet
         return " ".join(item[key])
-    elif spec == "DL":  # DecimalList
+    elif spec == "DL" or spec == "DS":  # DecimalList or DecimalSetDecimalList
         return " ".join(list(map(str, item[key])))
     else:
         return item[key]

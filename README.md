@@ -138,7 +138,9 @@ foo,3,1,,,"[{""boolean"" : false}]",,
 # Boolean : B (blank false)
 # Json : J
 # StringList : SL
+# StringSet : SS
 # DecimalList : DL
+# DecimalSet : DS
 
 [CSV_SPEC]
 StringPK=S
@@ -148,7 +150,9 @@ BooleanValue=B
 NullValue=S
 JsonValue=J
 StringListValues=SL
+StringSetValues=SS
 DecimalListValues=DL
+DecimalSetValues=DS
 ```
 
 ### Create DynamoDB table
