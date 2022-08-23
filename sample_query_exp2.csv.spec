@@ -6,7 +6,9 @@
 # Boolean : B (blank false)
 # Json : J
 # StringList : SL
+# StringSet : SS
 # DecimalList : DL
+# DecimalSet : DS
 
 [QUERY_OPTION]
 PKAttribute=StringPK
@@ -25,4 +27,6 @@ BooleanValue=B
 NullValue=S
 JsonValue=J
 StringListValues=SL
+StringSetValues=SS
 DecimalListValues=DL
+DecimalSetValues=DS
