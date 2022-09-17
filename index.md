@@ -15,7 +15,7 @@ Pythonが実行できる環境が必要です。
 ```shell
 $ pip install dynamodb-csv
 $ dynamodb-csv -h
-usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore]
+usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore] [--profile PROFILE]
 
 Import CSV file into DynamoDB table utilities
 
@@ -33,6 +33,7 @@ optional arguments:
   -o OUTPUT, --output OUTPUT
                         output file path required export mode
   --ignore              ignore import error
+  --profile PROFILE     using AWS profile
 ```
 
 または、Dockerを使うこともできます。
@@ -57,7 +58,13 @@ REGION=your_dynamodb_table_region
 #ENDPOINT_URL=http://dynamodb-local:8000
 ```
 
-`ENDPOINT_URL`を指定してDynamoDB-localを利用することも可能です。
+`ENDPOINT_URL`を指定してDynamoDB-localを利用することも可能です。  
+  
+ただし、`--profile`でAWS名前付きプロファイルを指定した場合は、このファイルの作成は不要です。
+
+```shell
+$ dynamodb-csv -i -t my_table -f sample.csv --profile default
+```
 
 # CSV定義ファイル
 
