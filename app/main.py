@@ -1,5 +1,6 @@
 import os
 import boto3
+from boto3.session import Session
 import configparser
 import argparse
 import sys
@@ -97,6 +98,8 @@ def parse_args(args: str) -> Any:
         "-o", "--output", help="output file path required export mode")
     parser.add_argument(
         "--ignore", help="ignore import error", action="store_true")
+    parser.add_argument(
+        "--profile", help="using AWS profile")
 
     return parser.parse_args()
 
@@ -110,22 +113,28 @@ def config_read_and_get_table(args: Any) -> Any:
     Returns:
         Any: DynamoDB table class
     """
-    if not os.path.isfile(config_file):
-        raise ValueError(f"Please make your {config_file} file")
+    # using AWS profile
+    if args.profile:
+        session = Session(profile_name=args.profile)
+        dynamodb = session.resource('dynamodb')
+    else:
+        # using config
+        if not os.path.isfile(config_file):
+            raise ValueError(f"Please make your {config_file} file")
 
-    config = configparser.ConfigParser()
-    config.optionxform = str
-    config.read_dict({"AWS": {"ENDPOINT_URL": ""}})
-    config.read(config_file)
+        config = configparser.ConfigParser()
+        config.optionxform = str
+        config.read_dict({"AWS": {"ENDPOINT_URL": ""}})
+        config.read(config_file)
 
-    endpoint_url = None
-    if config.get("AWS", "ENDPOINT_URL"):
-        endpoint_url = config.get("AWS", "ENDPOINT_URL")
-    dynamodb = boto3.resource("dynamodb",
-        region_name=config.get("AWS", "REGION"),
-        aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"),
-        endpoint_url=endpoint_url)
+        endpoint_url = None
+        if config.get("AWS", "ENDPOINT_URL"):
+            endpoint_url = config.get("AWS", "ENDPOINT_URL")
+        dynamodb = boto3.resource("dynamodb",
+            region_name=config.get("AWS", "REGION"),
+            aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
+            aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"),
+            endpoint_url=endpoint_url)
 
     table = dynamodb.Table(args.table)
     return table

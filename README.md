@@ -54,6 +54,7 @@ optional arguments:
   -o OUTPUT, --output OUTPUT
                         output file path required export mode
   --ignore              ignore import error
+  --profile PROFILE     using AWS profile
 ```
 
 ### Install for developer
@@ -109,6 +110,8 @@ REGION=your_dynamodb_table_region
 # Option
 #ENDPOINT_URL=http://dynamodb-local:8000
 ```
+
+Not required if AWS profile is specified as a parameter.
 
 ### Create your CSV and CSV spec file
 
