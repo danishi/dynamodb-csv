@@ -1,6 +1,7 @@
 # DynamoDB CSV utility
 
 [![ci](https://github.com/danishi/DynamoDB-CSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/danishi/dynamodb-csv/branch/master/graph/badge.svg?token=KRA27MJN42)](https://codecov.io/gh/danishi/dynamodb-csv)
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDB-CSV)
 ![Supported Python versions](https://img.shields.io/pypi/pyversions/dynamodb-csv.svg?color=%2334D058)
 [![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
