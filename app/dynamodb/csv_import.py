@@ -70,7 +70,7 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
 
                 batch.append(row)
 
-            if(len(batch)) > 0:
+            if (len(batch)) > 0:
                 write_to_dynamo(table, batch, ignore)
 
         if ignore:
