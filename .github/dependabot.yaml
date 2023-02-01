@@ -11,3 +11,9 @@ updates:
       interval: "weekly"
     # Allow up to 10 open pull requests for pip dependencies
     open-pull-requests-limit: 10
+    ignore:
+      # Python 3.7 support
+      - dependency-name: "flake8"
+        update-types: ["version-update:semver-minor"]
+      - dependency-name: "autopep8"
+        update-types: ["version-update:semver-minor"]
