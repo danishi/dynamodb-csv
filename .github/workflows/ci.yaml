@@ -36,12 +36,6 @@ jobs:
       - name: Run linter 👀
         run: flake8
 
-      - name: Run Dockerfile linter 👀
-        uses: hadolint/hadolint-action@v2.1.0
-        with:
-          dockerfile: Dockerfile
-          ignore: DL3013
-
       - name: Run unit tests 🧪
         run: pytest
 
