@@ -1,11 +1,9 @@
 name: test-github-package-release
 
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: "ref"
-        required: true
+  push:
+    tags:
+      - 'test-*'
 
 jobs:
   deploy:
@@ -20,16 +18,12 @@ jobs:
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # <= https://github.com/actions/checkout/issues/265
-      - run: git checkout ${{ github.event.inputs.ref }}
-        if: ${{ github.event.inputs.ref != '' }}
 
       - name: Set env 🔧
         run: |
           OWNER=$(echo ${{ github.repository_owner }})
           echo "RELEASE_OWNER=$OWNER" >> $GITHUB_ENV
-          IMAGE=docker_echo_hello
+          IMAGE=dynamodb-csv
           echo "RELEASE_IMAGE=$IMAGE" >> $GITHUB_ENV
           VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
