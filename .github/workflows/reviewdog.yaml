@@ -31,6 +31,12 @@ jobs:
           # GitHub Status Check won't become failure with warning.
           level: warning
 
+      - name: Run Dockerfile linter 👀
+        uses: hadolint/hadolint-action@v2.1.0
+        with:
+          dockerfile: Dockerfile
+          ignore: DL3013
+
       - name: Python Install dependencies 🧹
         run: |
           pip3 install -r requirements-dev.txt

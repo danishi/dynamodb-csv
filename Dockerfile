@@ -15,7 +15,7 @@
 # $ docker run --rm -v ${PWD}/:/local dynamodb-csv -i -t my_table -f sample.csv
 FROM python:3.8-slim-buster
 
-RUN pip install dynamodb-csv
+RUN pip install --no-cache-dir dynamodb-csv
 
 WORKDIR /local
 
