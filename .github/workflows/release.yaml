@@ -19,6 +19,7 @@ jobs:
       - name: Checkout 🔔
         uses: actions/checkout@v2
 
+      # PyPI release
       - name: Setup Python ${{ matrix.python-version }} 🔧
         uses: actions/setup-python@v2
         with:
@@ -41,6 +42,7 @@ jobs:
         run: sleep 60s
         shell: bash
 
+      # Docker Hub release
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
@@ -60,3 +62,30 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      # GitHub Packages release
+      - name: Set env 🔧
+        run: |
+          OWNER=$(echo ${{ github.repository_owner }})
+          echo "RELEASE_OWNER=$OWNER" >> $GITHUB_ENV
+          IMAGE=dynamodb-csv
+          echo "RELEASE_IMAGE=$IMAGE" >> $GITHUB_ENV
+          VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build 🔨
+        run: |
+          docker build -t ghcr.io/${{ env.RELEASE_OWNER }}/${{ env.RELEASE_IMAGE }}:${{ env.RELEASE_VERSION }} .
+
+      - name: Login 🚪
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ env.RELEASE_OWNER }} --password-stdin
+
+      - name: Push by tag name 🎁
+        run: |
+          docker push ghcr.io/${{ env.RELEASE_OWNER }}/${{ env.RELEASE_IMAGE }}:${{ env.RELEASE_VERSION }}
+
+      - name: Push by latest 🎁
+        run: |
+          docker image tag ghcr.io/${{ env.RELEASE_OWNER }}/${{ env.RELEASE_IMAGE }}:${{ env.RELEASE_VERSION }} ghcr.io/${{ env.RELEASE_OWNER }}/${{ env.RELEASE_IMAGE }}:latest
+          docker push ghcr.io/${{ env.RELEASE_OWNER }}/${{ env.RELEASE_IMAGE }}:latest

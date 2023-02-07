@@ -101,6 +101,8 @@ For Windows
 > docker run --rm -v %cd%/:/local danishi/dynamodb-csv:tagname -i -t my_table -f sample.csv
 ```
 
+Or [GitHub Packages](https://github.com/danishi/dynamodb-csv/pkgs/container/dynamodb-csv)
+
 ### Create your config.ini file on current directory
 
 ```ini
