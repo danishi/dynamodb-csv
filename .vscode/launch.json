@@ -18,7 +18,13 @@
         "id": "exportFile",
         "description": "Export file name.",
         "default": "sample_exp.csv"
-      }
+      },
+      {
+        "type": "promptString",
+        "id": "table2",
+        "description": "Use table name.",
+        "default": "my_table2"
+      },
     ],
     "configurations": [
         {
@@ -72,6 +78,23 @@
             "env": {
               "PYTHONPATH": "${workspaceFolder}"
             }
-        }
+        },
+        {
+          "name": "DynamoDB move",
+          "type": "python",
+          "request": "launch",
+          "program": "app/main.py",
+          "console": "integratedTerminal",
+          "args": [
+            "--move",
+            "-t",
+            "${input:table}",
+            "${input:table2}",
+          ],
+          "justMyCode": true,
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+      }
     ]
 }

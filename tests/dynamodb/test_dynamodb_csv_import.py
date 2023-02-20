@@ -10,7 +10,6 @@ def test_dynamodb_csv_import(table: Any) -> None:
     """
 
     csv_file = "sample.csv"
-
     result = csv_import(table, csv_file)
     print(result)
 
