@@ -352,6 +352,19 @@ please wait my_table truncating
 my_table truncated
 ```
 
+### Table move
+
+Move all items from table to table.
+A table with the same schema must be prepared in advance.
+
+```shell
+$ dynamodb-csv --move -t my_table my_table2
+my_table scan 300 items
+please wait my_table2 moving
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:15<00:00, 20.00it/s]
+my_table2 moved 300 items
+```
+
 ## License
 
 See [LICENSE](LICENSE)

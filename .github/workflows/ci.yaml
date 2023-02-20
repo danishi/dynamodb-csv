@@ -86,3 +86,4 @@ jobs:
           dynamodb-csv -e -t my_table -o sample_query_exp2.csv
           dynamodb-csv --truncate -t my_table
           dynamodb-csv -i -t my_table -f sample.csv --ignore
+          dynamodb-csv --move -t my_table my_table

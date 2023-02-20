@@ -4,9 +4,9 @@ from boto3.session import Session
 import configparser
 import argparse
 import sys
-from typing import Any, Tuple
+from typing import Any, Tuple, List
 
-from app.dynamodb import csv_import, csv_export, truncate
+from app.dynamodb import csv_import, csv_export, truncate, move
 
 __version__ = "1.4.11"
 config_file = "config.ini"
@@ -37,7 +37,7 @@ def execute() -> Tuple:
 
     # boto3 config setting
     try:
-        table = config_read_and_get_table(args)
+        tables = config_read_and_get_table(args)
     except ValueError as e:
         return (str(e), 1)
 
@@ -47,7 +47,7 @@ def execute() -> Tuple:
     # csv import
     if args.imp:
         if args.file is not None:
-            result = csv_import(table, args.file, args.ignore)
+            result = csv_import(tables[0], args.file, args.ignore)
         else:
             return ("Import mode requires a input file option.", 1)
 
@@ -57,13 +57,20 @@ def execute() -> Tuple:
             parameters = {}
             if args.index is not None:
                 parameters["IndexName"] = args.index
-            result = csv_export(table, args.output, parameters)
+            result = csv_export(tables[0], args.output, parameters)
         else:
             return ("Export mode requires a output file option.", 1)
 
     # truncate table
     if args.truncate:
-        result = truncate(table)
+        result = truncate(tables[0])
+
+    # move table
+    if args.move:
+        if len(tables) == 2:
+            result = move(tables)
+        else:
+            return ("Move mode requires a two tables.", 1)
 
     return result
 
@@ -89,7 +96,9 @@ def parse_args(args: str) -> Any:
     parser.add_argument(
         "--truncate", help="mode truncate", action="store_true")
     parser.add_argument(
-        "-t", "--table", help="DynamoDB table name", required=True)
+        "--move", help="mode move", action="store_true")
+    parser.add_argument(
+        "-t", "--table", nargs="*", help="DynamoDB table name", required=True)
     parser.add_argument(
         "-idx", "--index", help="DynamoDB index name")
     parser.add_argument(
@@ -104,14 +113,14 @@ def parse_args(args: str) -> Any:
     return parser.parse_args()
 
 
-def config_read_and_get_table(args: Any) -> Any:
+def config_read_and_get_table(args: Any) -> List:
     """Config read and Create DynamoDB table instance
 
     Args:
         args (Any): arguments
 
     Returns:
-        Any: DynamoDB table class
+        List: DynamoDB tables class
     """
     # using AWS profile
     if args.profile:
@@ -136,8 +145,11 @@ def config_read_and_get_table(args: Any) -> Any:
             aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"),
             endpoint_url=endpoint_url)
 
-    table = dynamodb.Table(args.table)
-    return table
+    tables = []
+    for table in args.table:
+        tables.append(dynamodb.Table(table))
+
+    return tables
 
 
 if __name__ == "__main__":
