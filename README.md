@@ -357,7 +357,8 @@ my_table truncated
 ### Table move
 
 Move all items from table to table.
-A table with the same schema must be prepared in advance.
+A table with the same schema must be prepared in advance.  
+Table items is not deleted and behaves like a copy.
 
 ```shell
 $ dynamodb-csv --move -t my_table_from my_table_to
