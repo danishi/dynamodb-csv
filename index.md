@@ -15,7 +15,8 @@ Pythonが実行できる環境が必要です。
 ```shell
 $ pip install dynamodb-csv
 $ dynamodb-csv -h
-usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] -t TABLE [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore] [--profile PROFILE]
+usage: dynamodb-csv [-h] [-v] [-i] [-e] [--truncate] [--move] -t [TABLE ...] [-idx INDEX] [-f FILE] [-o OUTPUT] [--ignore]
+               [--profile PROFILE]
 
 Import CSV file into DynamoDB table utilities
 
@@ -25,7 +26,8 @@ optional arguments:
   -i, --imp             mode import
   -e, --exp             mode export
   --truncate            mode truncate
-  -t TABLE, --table TABLE
+  --move                mode move
+  -t [TABLE ...], --table [TABLE ...]
                         DynamoDB table name
   -idx INDEX, --index INDEX
                         DynamoDB index name
@@ -45,6 +47,8 @@ $ docker run --rm -v ${PWD}/:/local danishi/dynamodb-csv:latest -h
 # Windows
 > docker run --rm -v %cd%/:/local danishi/dynamodb-csv:latest -h
 ```
+
+[GitHub Packages](https://github.com/danishi/dynamodb-csv/pkgs/container/dynamodb-csv)からもイメージを取得できます。
 
 # 接続設定ファイル
 `config.ini.example`をコピーして`config.ini`を作成し、接続先情報を記述します。
@@ -179,4 +183,13 @@ SKAttributeExpression=between
 
 ```shell
 $ dynamodb-csv --truncate -t my_table
+```
+
+### テーブルのアイテムの移動
+
+テーブルから別のテーブルへアイテムを全て移動できます。  
+事前に移動先のテーブルの作成とパーティションキー及びソートキーの定義を合わせておく必要があります。
+
+```shell
+$ dynamodb-csv --move -t my_table_from my_table_to
 ```
