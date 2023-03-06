@@ -3,13 +3,13 @@ name: reviewdog
 on: [pull_request]
 
 jobs:
-  flake8-lint:
+  lint-and-test:
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ['3.7', '3.11']
         os: [ubuntu-latest]
 
     steps:
@@ -43,6 +43,18 @@ jobs:
 
       - name: Run unit tests 🧪
         run: pytest
+
+  other-check:
+    name: Other on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
