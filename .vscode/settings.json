@@ -1,5 +1,4 @@
 {
-  // "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
   "editor.formatOnSave": true,
   "terminal.integrated.scrollback": 10000,
