@@ -2,6 +2,7 @@
 exclude =
     git,
     venv,
+    .venv,
     build
 
 ignore =
