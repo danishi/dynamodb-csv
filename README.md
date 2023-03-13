@@ -2,8 +2,16 @@
 
 Edit using devcontainer
 
-`$ jekyll serve --livereload`
+```bash
+jekyll serve --livereload
+```
 
 ## Theme
 
 [The Leap day theme](https://github.com/pages-themes/leap-day)
+
+## Lint
+
+```bash
+npx textlint index.md
+```

@@ -6,6 +6,7 @@
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
     "terminal.integrated.profiles.linux": {
       "bash": {
         "path": "/bin/bash"
@@ -26,7 +27,8 @@
     "oderwat.indent-rainbow",
     "shd101wyy.markdown-preview-enhanced",
     "christian-kohler.path-intellisense",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "taichi.vscode-textlint"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -43,7 +45,7 @@
   // Use 'postCreateCommand' to run commands after the container is created.
 
   // Use 'postStartCommand' to run commands after the container is started.
-  "postStartCommand": "jekyll serve --livereload",
+  "postStartCommand": "npm ci && jekyll serve --livereload",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode"

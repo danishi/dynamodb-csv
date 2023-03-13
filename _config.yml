@@ -5,3 +5,5 @@ exclude:
   - .git
   - _config.yml
   - README.md
+  - package.json
+  - package-lock.json

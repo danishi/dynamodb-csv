@@ -10,7 +10,7 @@ title: dynamodb-csv ユーザーガイド
 
 # インストール
 
-Pythonが実行できる環境が必要です。
+Pythonの実行できる環境が必要です。
 
 ```shell
 $ pip install dynamodb-csv
@@ -62,7 +62,7 @@ REGION=your_dynamodb_table_region
 #ENDPOINT_URL=http://dynamodb-local:8000
 ```
 
-`ENDPOINT_URL`を指定してDynamoDB-localを利用することも可能です。  
+`ENDPOINT_URL`を指定してDynamoDB-localの利用も可能です。  
   
 ただし、`--profile`でAWS名前付きプロファイルを指定した場合は、このファイルの作成は不要です。
 
@@ -72,7 +72,7 @@ $ dynamodb-csv -i -t my_table -f sample.csv --profile default
 
 # CSV定義ファイル
 
-インポート/エクスポート操作を行うためにDynamoDBテーブルの属性情報と合わせたCSV定義ファイルを作成する必要があります。
+インポート/エクスポート操作のためにDynamoDBテーブルの属性情報と合わせたCSV定義ファイルを作成する必要があります。
 インポートを行う場合は合わせてUTF-8で取り込むCSVファイルを作成します。
 ## 例
 * CSVファイル
@@ -179,7 +179,7 @@ SKAttributeExpression=between
 ```
 
 ## テーブルのクリア
-テーブルの項目を全て削除することもできます。
+テーブルの項目を全て削除できます。
 
 ```shell
 $ dynamodb-csv --truncate -t my_table
