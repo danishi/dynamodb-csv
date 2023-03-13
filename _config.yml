@@ -1,3 +1,7 @@
 theme: jekyll-theme-leap-day
 github:
   is_project_page: false
+exclude:
+  - .git
+  - _config.yml
+  - README.md
