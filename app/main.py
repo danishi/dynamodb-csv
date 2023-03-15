@@ -24,7 +24,7 @@ def execute() -> Tuple:
     """Command execute
 
     Raises:
-        ValueError: invalied config
+        ValueError: invalid config
 
     Returns:
         Tuple: result message and exit code
@@ -140,10 +140,12 @@ def config_read_and_get_table(args: Any) -> List:
         if config.get("AWS", "ENDPOINT_URL"):
             endpoint_url = config.get("AWS", "ENDPOINT_URL")
         dynamodb = boto3.resource("dynamodb",
-            region_name=config.get("AWS", "REGION"),
-            aws_access_key_id=config.get("AWS", "AWS_ACCESS_KEY_ID"),
-            aws_secret_access_key=config.get("AWS", "AWS_SECRET_ACCESS_KEY"),
-            endpoint_url=endpoint_url)
+                                  region_name=config.get("AWS", "REGION"),
+                                  aws_access_key_id=config.get(
+                                      "AWS", "AWS_ACCESS_KEY_ID"),
+                                  aws_secret_access_key=config.get(
+                                      "AWS", "AWS_SECRET_ACCESS_KEY"),
+                                  endpoint_url=endpoint_url)
 
     tables = []
     for table in args.table:
