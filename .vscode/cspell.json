@@ -7,6 +7,7 @@
     "devcontainer",
     "tqdm",
     "pytest",
+    "pypi",
     "pkeys"
   ]
 }
