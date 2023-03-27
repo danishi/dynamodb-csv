@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - "**.md"
       - ".devcontainer/**"
-      - ".github/**"
       - ".vscode/**"
 
 jobs:

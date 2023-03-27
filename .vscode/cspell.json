@@ -4,7 +4,9 @@
   "words": [
     "boto",
     "botocore",
+    "devcontainer",
     "tqdm",
+    "pytest",
     "pkeys"
   ]
 }
