@@ -19,14 +19,14 @@ jobs:
 
     steps:
       - name: Checkout 🔔
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # <= https://github.com/actions/checkout/issues/265
       - run: git checkout ${{ github.event.inputs.ref }}
         if: ${{ github.event.inputs.ref != '' }}
 
       - name: Setup Python ${{ matrix.python-version }} 🔧
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
