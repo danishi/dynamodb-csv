@@ -30,6 +30,8 @@ Written in a simple Python script, it's easy to parse and modify.
 
 It works for me.
 
+![terminalizer](https://user-images.githubusercontent.com/13270461/237145047-ec815dad-1ff6-4678-baa4-fd182ee35269.gif)
+
 ## Getting started 🚀
 
 ### Install
