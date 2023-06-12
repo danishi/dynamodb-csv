@@ -4,7 +4,7 @@ autopep8==1.6.0
 flake8==5.0.4
 lizard==1.17.10
 moto==4.1.11
-pytest==7.3.1
+pytest==7.3.2
 pytest-cov==4.1.0
 pytest-mock==3.10.0
 pytest-sugar==0.9.7
