@@ -71,8 +71,8 @@ jobs:
         run: |
           aws dynamodb create-table --cli-input-json file://my_table.json --region ap-northeast-1 --endpoint-url http://localhost:8000
         env:
-          AWS_ACCESS_KEY_ID: "your_key"
-          AWS_SECRET_ACCESS_KEY: "your_secret_key"
+          AWS_ACCESS_KEY_ID: "foo"
+          AWS_SECRET_ACCESS_KEY: "bar"
 
       - name: Run commands 🚀
         run: |
