@@ -1,6 +1,6 @@
 [AWS]
-AWS_ACCESS_KEY_ID=your_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_ACCESS_KEY_ID=foo
+AWS_SECRET_ACCESS_KEY=bar
 REGION=ap-northeast-1
 # Option
 #ENDPOINT_URL=http://dynamodb-local:8000
