@@ -11,3 +11,9 @@ updates:
       interval: "weekly"
     # Allow up to 10 open pull requests for pip dependencies
     open-pull-requests-limit: 10
+    # Grouped version updates
+    groups:
+      boto3-dependencies:
+        patterns:
+          - "boto3"
+          - "moto"
