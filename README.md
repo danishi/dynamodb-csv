@@ -6,9 +6,9 @@
 ![MIT](https://img.shields.io/github/license/danishi/DynamoDB-CSV)
 ![Supported Python versions](https://img.shields.io/pypi/pyversions/dynamodb-csv.svg?color=%2334D058)
 [![PyPI](https://badge.fury.io/py/dynamodb-csv.svg)](https://badge.fury.io/py/dynamodb-csv)
-[![Downloads](https://pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
-[![Downloads week](https://pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
-[![Downloads month](https://pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
+[![Downloads](https://static.pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
+[![Downloads week](https://static.pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
+[![Downloads month](https://static.pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
 [![Docker Pulls](https://img.shields.io/docker/pulls/danishi/dynamodb-csv)](https://hub.docker.com/r/danishi/dynamodb-csv)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
@@ -263,6 +263,7 @@ my_table csv imported 299 items and 1 error items
 No batch write is done when this option is used.
 
 #### Import options
+
 By default, if CSV has an empty value, it will be set to empty.  
 There are options to convert this to Null or not to set the attribute itself.
 
@@ -286,11 +287,13 @@ my_table csv exported 300 items
 ```
 
 #### Use index
+
 ```shell
 $ dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_gsi_exp.csv
 ```
 
 #### Use Query
+
 ```shell
 $ dynamodb-csv -e -t my_table -idx NumberSK-index -o sample_query_exp.csv
 ```
@@ -316,15 +319,16 @@ JsonValue=J
 ```
 
 ##### Query options
-* `PKAttribute` : Partition key attribute name
-* `PKAttributeValue` : Partition key attribute query value
-* `PKAttributeType` : Partition key attribute data type
-* `SKAttribute` : Sort key attribute name
-* `SKAttributeValues` : Sort key attribute query value or values
-  * ex. `foo` or `foo,bar`
-* `SKAttributeType` : Sort key attribute data type
-* `SKAttributeExpression` : Sort key attribute query expression [ex.](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions)
-  * `begins_with` `between` `eq` `gt` `gte` `lt` `lte`
+
+|           key           | description                              | example                                                                                                                                                                      |
+| :---------------------: | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `PKAttribute`      | Partition key attribute name             |                                                                                                                                                                              |
+|   `PKAttributeValue`    | Partition key attribute query value      |                                                                                                                                                                              |
+|    `PKAttributeType`    | Partition key attribute data type        |                                                                                                                                                                              |
+|      `SKAttribute`      | Sort key attribute name                  |                                                                                                                                                                              |
+|   `SKAttributeValues`   | Sort key attribute query value or values | ex. `foo` or `foo,bar`                                                                                                                                                       |
+|    `SKAttributeType`    | Sort key attribute data type             |                                                                                                                                                                              |
+| `SKAttributeExpression` | Sort key attribute query expression      | [ex.](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions) `begins_with` `between` `eq` `gt` `gte` `lt` `lte` |
 
 ```shell
 $ dynamodb-csv -e -t my_table -o sample_query_exp2.csv
@@ -382,4 +386,5 @@ See [LICENSE](LICENSE)
 ## Appendix
 
 ### User guide
+
 - [User guide (for japanese)](https://danishi.github.io/dynamodb-csv/)
