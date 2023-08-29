@@ -151,15 +151,15 @@ JsonValue=J
 ### クエリー条件
 クエリー条件として以下が指定できます。
 
-* `PKAttribute` : パーティションキー属性名
-* `PKAttributeValue` : パーティションキー属性値
-* `PKAttributeType` : パーティションキー属性のデータ型
-* `SKAttribute` : ソートキー属性名
-* `SKAttributeValues` : ソートキー属性値（複数可）
-  * 例: `foo` or `foo,bar`
-* `SKAttributeType` : ソートキー属性のデータ型
-* `SKAttributeExpression` : ソートキーへのクエリー条件 [指定の例](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions)
-* `begins_with` `between` `eq` `gt` `gte` `lt` `lte`
+| キー | 説明 | 例 |
+| :--: | :---- | :--- |
+| `PKAttribute` | パーティションキー属性名 | |
+| `PKAttributeValue` | パーティションキー属性値| |
+| `PKAttributeType` | パーティションキー属性のデータ型| |
+| `SKAttribute` | ソートキー属性名| |
+| `SKAttributeValues` | ソートキー属性値（複数可）| 例: `foo` or `foo,bar` |
+| `SKAttributeType` | ソートキー属性のデータ型 | |
+| `SKAttributeExpression` | ソートキーへのクエリー条件 | [指定の例](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html#dynamodb-conditions): `begins_with` `between` `eq` `gt` `gte` `lt` `lte`|
 
 ## ソートキーを使ったクエリー指定のエクスポートの定義
 
