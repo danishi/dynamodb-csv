@@ -1,3 +1,3 @@
-boto3==1.28.57
+boto3==1.28.62
 configparser==6.0.0
 tqdm==4.66.1
