@@ -86,3 +86,10 @@ jobs:
           dynamodb-csv --truncate -t my_table
           dynamodb-csv -i -t my_table -f sample.csv --ignore
           dynamodb-csv --move -t my_table my_table
+
+  action-timeline:
+    needs: [unit_tests, run_commands]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Action timeline 📊
+        uses: Kesin11/actions-timeline@v1

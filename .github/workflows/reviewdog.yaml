@@ -9,10 +9,13 @@ jobs:
     timeout-minutes: 5
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ["3.10"]
         os: [ubuntu-latest]
 
     steps:
+      - name: Action timeline 📊
+        uses: Kesin11/actions-timeline@v1
+
       - name: Checkout 🔔
         uses: actions/checkout@v3
 
