@@ -119,7 +119,8 @@ Not required if AWS profile is specified as a parameter.
 
 ### Create your CSV and CSV spec file
 
-Prepare a UTF-8 CSV file of the format you want to import into your DynamoDB table and a file that defines that format.
+> [!NOTE]
+> Prepare a UTF-8 CSV file of the format you want to import into your DynamoDB table and a file that defines that format.
 
 #### For example
 
@@ -164,7 +165,8 @@ DecimalSetValues=DS
 
 ### Create DynamoDB table
 
-You need to have created a DynamoDB table that meets your specifications.
+> [!NOTE]
+> You need to have created a DynamoDB table that meets your specifications.
 
 ```shell
 $ aws dynamodb create-table --cli-input-json file://my_table.json --region ap-northeast-1
@@ -356,6 +358,9 @@ please wait my_table truncating
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 300/300 [00:07<00:00, 40.95it/s]
 my_table truncated
 ```
+
+> [!CAUTION]
+> This operation is irreversible. Take care.
 
 ### Table move
 
