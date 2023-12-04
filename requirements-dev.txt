@@ -3,7 +3,7 @@
 autopep8==2.0.4
 flake8==6.1.0
 lizard==1.17.10
-moto==4.2.8
+moto==4.2.11
 pytest==7.4.3
 pytest-cov==4.1.0
 pytest-mock==3.12.0
