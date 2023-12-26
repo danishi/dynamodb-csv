@@ -58,6 +58,7 @@ jobs:
 
       - name: Install dynamodb-csv 💉
         run: |
+          pip install setuptools
           python setup.py install
           dynamodb-csv -v
 
