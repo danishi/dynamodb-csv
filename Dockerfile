@@ -13,7 +13,7 @@
 # > docker run --rm -v %cd%/:/local dynamodb-csv -i -t my_table -f sample.csv
 # for Linux
 # $ docker run --rm -v ${PWD}/:/local dynamodb-csv -i -t my_table -f sample.csv
-FROM python:3.8-slim-buster
+FROM python:3.12-slim
 
 RUN pip install --no-cache-dir dynamodb-csv
 
