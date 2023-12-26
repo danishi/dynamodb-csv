@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ["3.12"]
         os: [ubuntu-latest]
 
     steps:
@@ -39,7 +39,7 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-          TWINE_REPOSITORY_URL: 'https://test.pypi.org/legacy/'
+          TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
         run: |
           python setup.py sdist bdist_wheel
           twine upload --repository pypitest dist/*

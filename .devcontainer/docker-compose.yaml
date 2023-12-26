@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
       args:
-        - VARIANT=3.11
+        - VARIANT=3.12
     volumes:
       - ../:/workspace/
     tty: true
