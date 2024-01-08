@@ -1,7 +1,7 @@
 -r requirements.txt
 
 autopep8==2.0.4
-flake8==6.1.0
+flake8==7.0.0
 lizard==1.17.10
 moto==4.2.12
 pytest==7.4.4
