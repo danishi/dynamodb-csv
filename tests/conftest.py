@@ -1,5 +1,5 @@
 import boto3
-from moto import mock_dynamodb
+from moto import dynamodb
 import json
 from decimal import Decimal
 import pytest
@@ -17,9 +17,9 @@ def table() -> Any:
     """
 
     print("Create mock DynamoDB table")
-    with mock_dynamodb():
-        dynamodb = boto3.resource("dynamodb", region_name="ap-northeast-1")
-        dynamodb.create_table(
+    with dynamodb():
+        dynamodb_client = boto3.resource("dynamodb", region_name="ap-northeast-1")
+        dynamodb_client.create_table(
             TableName="my_table",
             KeySchema=[
                 {
@@ -67,7 +67,7 @@ def table() -> Any:
                 "WriteCapacityUnits": 5
             }
         )
-        table = dynamodb.Table('my_table')
+        table = dynamodb_client.Table('my_table')
 
         # Test data put
         for i in range(size):
