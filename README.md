@@ -1,9 +1,15 @@
 # DynamoDB CSV utility
 
+[![Release Notes](https://img.shields.io/github/release/danishi/dynamodb-csv)](https://github.com/danishi/dynamodb-csv/releases)
+[![Contributors](https://img.shields.io/github/contributors/danishi/dynamodb-csv)](https://github.com/danishi/dynamodb-csv/contributors)
+[![Last Commit](https://img.shields.io/github/last-commit/danishi/dynamodb-csv)](https://github.com/danishi/dynamodb-csv/last-commit)
+[![Open Issues](https://img.shields.io/github/issues-raw/danishi/dynamodb-csv)](https://github.com/danishi/dynamodb-csv/issues)
+[![LRepo-size](https://img.shields.io/github/repo-size/danishi/dynamodb-csv)](https://github.com/danishi/dynamodb-csv/repo-size)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/danishi/dynamodb-csv)
+[![MIT](https://img.shields.io/github/license/danishi/DynamoDB-CSV)](https://github.com/danishi/dynamodb-csv/blob/master/LICENSE)
 [![ci](https://github.com/danishi/DynamoDB-CSV/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/danishi/DynamoDBImportCSV/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/danishi/dynamodb-csv/branch/master/graph/badge.svg?token=KRA27MJN42)](https://codecov.io/gh/danishi/dynamodb-csv)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c1d2a51bbd72d6198e0c/maintainability)](https://codeclimate.com/github/danishi/dynamodb-csv/maintainability)
-[![MIT](https://img.shields.io/github/license/danishi/DynamoDB-CSV)](https://github.com/danishi/dynamodb-csv/blob/master/LICENSE)
 ![Supported Python versions](https://img.shields.io/pypi/pyversions/dynamodb-csv.svg?color=%2334D058)
 [![PyPI](https://badge.fury.io/py/dynamodb-csv.svg)](https://badge.fury.io/py/dynamodb-csv)
 [![Downloads](https://static.pepy.tech/badge/dynamodb-csv)](https://pepy.tech/project/dynamodb-csv)
