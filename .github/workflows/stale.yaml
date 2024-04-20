@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Check stale Issues and PRs 😣
-        uses: actions/stale@v5
+        uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
