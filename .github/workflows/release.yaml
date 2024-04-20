@@ -45,7 +45,7 @@ jobs:
       # Docker Hub release
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v5
         with:
           images: danishi/dynamodb-csv
 
