@@ -68,34 +68,39 @@ optional arguments:
 
 ### Install for developer
 
-```shell
-$ python -m venv venv
-$ . venv/bin/activate
-$ python setup.py install
-$ dynamodb-csv -h
-```
+<details>
+  <summary>Setup and install</summary>
 
-Or
+  ```shell
+  $ python -m venv venv
+  $ . venv/bin/activate
+  $ python setup.py install
+  $ dynamodb-csv -h
+  ```
 
-```shell
-$ python -m venv venv
-$ . venv/bin/activate
-$ pip install -r requirements-dev.txt
-$ export PYTHONPATH=`pwd`
-$ python app/main.py -h
-```
+  Or
 
-For Windows
+  ```shell
+  $ python -m venv venv
+  $ . venv/bin/activate
+  $ pip install -r requirements-dev.txt
+  $ export PYTHONPATH=`pwd`
+  $ python app/main.py -h
+  ```
 
-```shell
-> python -m venv venv
-> venv\Scripts\activate
-> pip install -r requirements-dev.txt
-> set PYTHONPATH=%cd%
-> python app/main.py -h
-```
+  For Windows
 
-Or you can use devcontainer.
+  ```shell
+  > python -m venv venv
+  > venv\Scripts\activate
+  > pip install -r requirements-dev.txt
+  > set PYTHONPATH=%cd%
+  > python app/main.py -h
+  ```
+
+  Or you can use devcontainer.
+
+</details>
 
 ### [Use Docker image](https://hub.docker.com/r/danishi/dynamodb-csv)
 
