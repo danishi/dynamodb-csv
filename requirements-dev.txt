@@ -1,6 +1,6 @@
 -r requirements.txt
 
-autopep8==2.1.0
+autopep8==2.2.0
 flake8==7.0.0
 lizard==1.17.10
 moto==5.0.5
