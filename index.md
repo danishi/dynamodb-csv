@@ -84,6 +84,24 @@ $ dynamodb-csv -i -t my_table -f sample.csv --profile default
   * [sample_query_exp.csv.spec](https://github.com/danishi/dynamodb-csv/blob/master/sample_query_exp.csv.spec) : パーティションキーを使ったクエリー指定のエクスポートの定義
   * [sample_query_exp2.csv.spec](https://github.com/danishi/dynamodb-csv/blob/master/sample_query_exp2.csv.spec) : ソートキーを使ったクエリー指定のエクスポートの定義
 
+定義ファイルの型とDynamoDBの型は厳密に一致しません。  
+下記の表を参考にしてください。
+
+|     CSVの型     | DynamoDBの型 | 値の例                         |
+| :--------------: | :--------------------------: | :---------------------------------------------- |
+|    String : S    |            String            | `foo`                                           |
+|   Integer : I    |            Number            | `1`                                             |
+|   Decimal : D    |            Number            | `1.23`                                          |
+|   Boolean : B    |           Boolean            | `TRUE`                                          |
+|     Json : J     |             Map              | `[{""string"" : ""value""},{""number"" : 100}]` |
+| StringList : SL  |             List             | `foo bar baz`                                   |
+|  StringSet : SS  |          String Set          | `foo bar baz`                                   |
+| DecimalList : DL |             List             | `10 10.1 20`                                    |
+| DecimalSet : DS  |          Number Set          | `10 10.1 20`                                    |
+
+またバイナリ型はサポートされていません。  
+インポート時のNullの扱いは後述します。
+
 # コマンド実行例
 
 ## テスト用テーブルの作成
