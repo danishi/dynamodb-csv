@@ -71,34 +71,34 @@ optional arguments:
 <details>
   <summary>Setup and install</summary>
 
-  ```shell
-  $ python -m venv venv
-  $ . venv/bin/activate
-  $ python setup.py install
-  $ dynamodb-csv -h
-  ```
+```shell
+$ python -m venv venv
+$ . venv/bin/activate
+$ python setup.py install
+$ dynamodb-csv -h
+```
 
-  Or
+Or
 
-  ```shell
-  $ python -m venv venv
-  $ . venv/bin/activate
-  $ pip install -r requirements-dev.txt
-  $ export PYTHONPATH=`pwd`
-  $ python app/main.py -h
-  ```
+```shell
+$ python -m venv venv
+$ . venv/bin/activate
+$ pip install -r requirements-dev.txt
+$ export PYTHONPATH=`pwd`
+$ python app/main.py -h
+```
 
-  For Windows
+For Windows
 
-  ```shell
-  > python -m venv venv
-  > venv\Scripts\activate
-  > pip install -r requirements-dev.txt
-  > set PYTHONPATH=%cd%
-  > python app/main.py -h
-  ```
+```shell
+> python -m venv venv
+> venv\Scripts\activate
+> pip install -r requirements-dev.txt
+> set PYTHONPATH=%cd%
+> python app/main.py -h
+```
 
-  Or you can use devcontainer.
+Or you can use devcontainer.
 
 </details>
 
@@ -174,6 +174,23 @@ StringSetValues=SS
 DecimalListValues=DL
 DecimalSetValues=DS
 ```
+
+The CSV_SPEC type is mapped to the [DynamoDB attribute type](https://docs.aws.amazon.com/en_us/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypeDescriptors) in this way.
+
+|     CSV_SPEC     | DynamoDB attribute data type | example value                                   |
+| :--------------: | :--------------------------: | :---------------------------------------------- |
+|    String : S    |            String            | `foo`                                           |
+|   Integer : I    |            Number            | `1`                                             |
+|   Decimal : D    |            Number            | `1.23`                                          |
+|   Boolean : B    |           Boolean            | `TRUE`                                          |
+|     Json : J     |             Map              | `[{""string"" : ""value""},{""number"" : 100}]` |
+| StringList : SL  |             List             | `foo bar baz`                                   |
+|  StringSet : SS  |          String Set          | `foo bar baz`                                   |
+| DecimalList : DL |             List             | `10 10.1 20`                                    |
+| DecimalSet : DS  |          Number Set          | `10 10.1 20`                                    |
+
+Sorry, Binary type and Binary Set type is not supported.
+Null type, look [here](https://github.com/danishi/dynamodb-csv?tab=readme-ov-file#import-options).
 
 ### Create DynamoDB table
 
