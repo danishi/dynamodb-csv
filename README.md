@@ -173,6 +173,9 @@ StringListValues=SL
 StringSetValues=SS
 DecimalListValues=DL
 DecimalSetValues=DS
+
+# [DELIMITER_OPTION]
+# DelimiterCharacter=|
 ```
 
 The CSV_SPEC type is mapped to the [DynamoDB attribute type](https://docs.aws.amazon.com/en_us/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypeDescriptors) in this way.
@@ -191,6 +194,9 @@ The CSV_SPEC type is mapped to the [DynamoDB attribute type](https://docs.aws.am
 
 Sorry, Binary type and Binary Set type is not supported.
 Null type, look [here](https://github.com/danishi/dynamodb-csv?tab=readme-ov-file#import-options).
+
+The default delimiter for list and set types is a space.  
+If you want to set it, please comment out `DELIMITER_OPTION` and `DelimiterCharacter`.
 
 ### Create DynamoDB table
 
