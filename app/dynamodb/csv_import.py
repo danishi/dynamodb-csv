@@ -29,6 +29,12 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
     except Exception as e:
         return (f"CSV specification file can't read:{e}", 1)
 
+    # get delimiter options
+    if "DELIMITER_OPTION" in csv_spec:
+        delimiter = csv_spec.get("DELIMITER_OPTION", "DelimiterCharacter")
+    else:
+        delimiter = " "
+
     # read csv
     try:
         with open(file, mode="r", encoding="utf_8") as f:
@@ -64,7 +70,7 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
                                 continue
 
                     try:
-                        row[key] = convert_column(spec, row, key)
+                        row[key] = convert_column(spec, row, key, delimiter)
                     except Exception:
                         del row[key]
 
@@ -85,13 +91,14 @@ def csv_import(table: Any, file: str, ignore: bool = False) -> Tuple:
         return (f"CSV file can't read:{e}", 1)
 
 
-def convert_column(spec: str, row: Dict, key: str) -> Any:
+def convert_column(spec: str, row: Dict, key: str, delimiter: str) -> Any:
     """convert column
 
     Args:
         spec (str): type of column
         row (Dict): row data
         key (str): key
+        delimiter (str): list split delimiter
 
     Returns:
         Any: converted column value
@@ -107,13 +114,13 @@ def convert_column(spec: str, row: Dict, key: str) -> Any:
     elif spec == "J":  # Json
         return json.loads(row[key], parse_float=Decimal)
     elif spec == "SL":  # StringList
-        return row[key].split()
+        return row[key].split(delimiter)
     elif spec == "SS":  # StringSet
-        return set(row[key].split())
+        return set(row[key].split(delimiter))
     elif spec == "DL":  # DecimalList
-        return list(map(Decimal, row[key].split()))
+        return list(map(Decimal, row[key].split(delimiter)))
     elif spec == "DS":  # DecimalSet
-        return set(list(map(Decimal, row[key].split())))
+        return set(list(map(Decimal, row[key].split(delimiter))))
     else:
         return row[key]
 

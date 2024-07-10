@@ -25,3 +25,6 @@ DecimalSetValues=DS
 # [IMPORT_OPTION]
 # ConvertBlankToNullAttrs=NullValue,JsonValue
 # ConvertBlankToDropAttrs=DecimalValue
+
+# [DELIMITER_OPTION]
+# DelimiterCharacter=|

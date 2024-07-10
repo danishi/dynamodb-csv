@@ -27,6 +27,12 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
     except Exception as e:
         return (f"CSV specification file can't read:{e}", 1)
 
+    # get delimiter options
+    if "DELIMITER_OPTION" in csv_spec:
+        delimiter = csv_spec.get("DELIMITER_OPTION", "DelimiterCharacter")
+    else:
+        delimiter = " "  # default
+
     # write csv
     try:
         with open(file, mode="w", encoding="utf_8") as f:
@@ -117,7 +123,7 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
                         del item[key]
                         continue
 
-                    item[key] = convert_item(spec, item, key)
+                    item[key] = convert_item(spec, item, key, delimiter)
 
                 writer.writerow(item)
 
@@ -131,13 +137,14 @@ def csv_export(table: Any, file: str, parameters: Dict = {}) -> Tuple:
         return (str(e), 1)
 
 
-def convert_item(spec: str, item: Dict, key: str) -> Any:
+def convert_item(spec: str, item: Dict, key: str, delimiter: str) -> Any:
     """convert item
 
     Args:
         spec (str): type of item
         row (Dict): row data
         key (str): key
+        delimiter (str): list join delimiter
 
     Returns:
         Any: converted item value
@@ -154,9 +161,9 @@ def convert_item(spec: str, item: Dict, key: str) -> Any:
     elif spec == "J":  # Json
         return json.dumps(item[key], default=decimal_encode)
     elif spec == "SL" or spec == "SS":  # StringList or StringSet
-        return " ".join(item[key])
+        return delimiter.join(item[key])
     elif spec == "DL" or spec == "DS":  # DecimalList or DecimalSetDecimalList
-        return " ".join(list(map(str, item[key])))
+        return delimiter.join(list(map(str, item[key])))
     else:
         return item[key]
 

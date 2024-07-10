@@ -21,3 +21,6 @@ StringListValues=SL
 StringSetValues=SS
 DecimalListValues=DL
 DecimalSetValues=DS
+
+[DELIMITER_OPTION]
+DelimiterCharacter=|
