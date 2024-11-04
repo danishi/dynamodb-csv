@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.13"]
         os: [ubuntu-latest]
 
     steps:
