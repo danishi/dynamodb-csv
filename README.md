@@ -16,6 +16,7 @@
 [![Downloads week](https://static.pepy.tech/badge/dynamodb-csv/week)](https://pepy.tech/project/dynamodb-csv)
 [![Downloads month](https://static.pepy.tech/badge/dynamodb-csv/month)](https://pepy.tech/project/dynamodb-csv)
 [![Docker Pulls](https://img.shields.io/docker/pulls/danishi/dynamodb-csv)](https://hub.docker.com/r/danishi/dynamodb-csv)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/danishi/dynamodb-csv)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/danishi/dynamodb-csv)
