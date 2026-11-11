@@ -67,6 +67,17 @@ def test_config_file_not_exists(mocker: Any) -> None:
     assert result[0] == "Please make your config.ini file"
 
 
+def test_parse_args_uses_given_args() -> None:
+    """Unit test parse_args honors its argument, not sys.argv."""
+
+    args = main.parse_args(
+        ["-i", "-t", "test_table", "-f", "sample.csv"])
+
+    assert args.imp is True
+    assert args.table == ["test_table"]
+    assert args.file == "sample.csv"
+
+
 def test_config_file_invalid(mocker: Any) -> None:
     """Unit test config file invalid format
 
