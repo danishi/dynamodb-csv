@@ -110,7 +110,7 @@ def parse_args(args: str) -> Any:
     parser.add_argument(
         "--profile", help="using AWS profile")
 
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
 def config_read_and_get_table(args: Any) -> List:
